@@ -25,7 +25,7 @@ public class AparelhoDTO {
 	 public AparelhoDTO (Aparelho entity) {
 		 this.id_aparelho = entity.getId_aparelho();
 		 this.marcaModelo = entity.getMarcaModelo();
-		 this.contaGoogle = entity.getMarcaModelo();
+		 this.contaGoogle = entity.getContaGoogle();
 		 this.chip01 = entity.getChip01();
 		 this.chip02 = entity.getChip02();
 		 this.whatsapp01 = entity.getWhatsapp01();
