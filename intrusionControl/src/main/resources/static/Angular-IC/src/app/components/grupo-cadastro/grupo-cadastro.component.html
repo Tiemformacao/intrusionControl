@@ -29,3 +29,30 @@
     <button type="submit">Salvar</button>
   </form>
 </div>
+
+<div class="grupo-lista">
+  <h2>Grupos Cadastrados</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Nome do Grupo</th>
+        <th>Facção</th>
+        <th>Área</th>
+        <th>Irmão</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let grupo of grupos">
+        <td>{{ grupo.nomeGrupo }}</td>
+        <td>{{ grupo.faccao?.nome }}</td>
+        <td>{{ grupo.area }}</td>
+        <td>{{ grupo.irmao?.nomeIrmao }}</td>
+        <td>
+          <button>Remover</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+

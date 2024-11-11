@@ -19,6 +19,8 @@ export class GrupoCadastroComponent implements OnInit {
   grupo: Grupo = new Grupo();
   faccoes: Faccao[] = [];
   irmaos: Irmao[] = [];
+  
+  grupos: Grupo[] = []; // Lista para armazenar os grupos
 
   constructor(
     private grupoService: GrupoService,
@@ -30,6 +32,7 @@ export class GrupoCadastroComponent implements OnInit {
     // Carregar facções e irmãos ao inicializar o componente
     this.carregarFaccoes();
     this.carregarIrmaos();
+	this.carregarGrupos();
   }
 
   carregarFaccoes(): void {
@@ -55,21 +58,55 @@ export class GrupoCadastroComponent implements OnInit {
       }
     });
   }
+  
+  
+  carregarGrupos(): void {
+      this.grupoService.getGrupos().subscribe({
+        next: (response: Grupo[]) => {
+          this.grupos = response;
+          console.log('Grupos carregados:', this.grupos);
+        },
+        error: (err) => {
+          console.error('Erro ao buscar grupos:', err);
+        }
+      });
+    }
+  
 
-  salvarGrupo(): void {
+//  salvarGrupo(): void {
+//    this.grupoService.saveGrupo(this.grupo).subscribe({
+//      next: (response: Grupo) => {
+//        console.log('Grupo salvo com sucesso:', response);
+//        alert('Grupo salvo com sucesso!');
+//        this.grupo = new Grupo(); // Limpar o formulário após o salvamento
+//		this.carregarGrupos(); // Atualizar a lista de grupos
+//      },
+//      error: (err) => {
+//        console.error('Erro ao salvar grupo:', err);
+//        alert('Erro ao salvar o grupo!');
+//      },
+//      complete: () => {
+//        console.log('Operação concluída.');
+//      }
+//    });
+//  }
+  
+  
+salvarGrupo(): void {
     this.grupoService.saveGrupo(this.grupo).subscribe({
       next: (response: Grupo) => {
         console.log('Grupo salvo com sucesso:', response);
-        alert('Grupo salvo com sucesso!');
-        this.grupo = new Grupo(); // Limpar o formulário após o salvamento
+		alert('Grupo salvo com sucesso!');
+		this.grupo = new Grupo(); // Limpar o formulário após o salvamento
+        this.grupos.unshift(response); // Adiciona o grupo salvo no topo da lista
       },
       error: (err) => {
         console.error('Erro ao salvar grupo:', err);
-        alert('Erro ao salvar o grupo!');
       },
       complete: () => {
         console.log('Operação concluída.');
       }
     });
   }
+  
 }
