@@ -1,5 +1,8 @@
 package com.intrusionControl.demo.DTO;
 
+import java.time.LocalDate;
+
+
 import com.intrusionControl.demo.entities.Aparelho;
 
 
@@ -16,6 +19,16 @@ public class AparelhoDTO {
 	 private String whatsappGb01;
 	 private String whatsappGb02;
 	 private String observacao;
+	   
+	 private LocalDate UltRecChip01;
+	 private LocalDate UltRecChip02;
+	 private String cadastroChip01;
+	 private String cadastroChip02;
+	 private String irmaoWA01;
+	 private String irmaoWA02;
+	 private String irmaoGB01;
+	 private String irmaoGB02;
+
 	 
 	 public AparelhoDTO() {
 		 
@@ -33,6 +46,14 @@ public class AparelhoDTO {
 		 this.whatsappGb01 = entity.getWhatsappGb01();
 		 this.whatsappGb02 = entity.getWhatsappGb02();
 		 this.observacao = entity.getObservacao();
+		 this.UltRecChip01 = entity.getUltRecChip01();
+		 this.UltRecChip02 = entity.getUltRecChip02();
+		 this.cadastroChip01 = entity.getCadastroChip01();
+		 this.cadastroChip02 = entity.getCadastroChip02();
+		 this.irmaoWA01 = entity.getIrmaoWA01();
+		 this.irmaoWA02 = entity.getIrmaoWA02();
+		 this.irmaoGB01 = entity.getIrmaoGB01();
+		 this.irmaoGB02 = entity.getIrmaoGB02();
 	 }
 
 	public String getId_aparelho() {
@@ -113,6 +134,70 @@ public class AparelhoDTO {
 
 	public void setObservacao(String observacao) {
 		this.observacao = observacao;
+	}
+
+	public LocalDate getUltRecChip01() {
+		return UltRecChip01;
+	}
+
+	public void setUltRecChip01(LocalDate ultRecChip01) {
+		UltRecChip01 = ultRecChip01;
+	}
+
+	public LocalDate getUltRecChip02() {
+		return UltRecChip02;
+	}
+
+	public void setUltRecChip02(LocalDate ultRecChip02) {
+		UltRecChip02 = ultRecChip02;
+	}
+
+	public String getCadastroChip01() {
+		return cadastroChip01;
+	}
+
+	public void setCadastroChip01(String cadastroChip01) {
+		this.cadastroChip01 = cadastroChip01;
+	}
+
+	public String getCadastroChip02() {
+		return cadastroChip02;
+	}
+
+	public void setCadastroChip02(String cadastroChip02) {
+		this.cadastroChip02 = cadastroChip02;
+	}
+
+	public String getIrmaoWA01() {
+		return irmaoWA01;
+	}
+
+	public void setIrmaoWA01(String irmaoWA01) {
+		this.irmaoWA01 = irmaoWA01;
+	}
+
+	public String getIrmaoWA02() {
+		return irmaoWA02;
+	}
+
+	public void setIrmaoWA02(String irmaoWA02) {
+		this.irmaoWA02 = irmaoWA02;
+	}
+
+	public String getIrmaoGB01() {
+		return irmaoGB01;
+	}
+
+	public void setIrmaoGB01(String irmaoGB01) {
+		this.irmaoGB01 = irmaoGB01;
+	}
+
+	public String getIrmaoGB02() {
+		return irmaoGB02;
+	}
+
+	public void setIrmaoGB02(String irmaoGB02) {
+		this.irmaoGB02 = irmaoGB02;
 	}
 	 
 	 

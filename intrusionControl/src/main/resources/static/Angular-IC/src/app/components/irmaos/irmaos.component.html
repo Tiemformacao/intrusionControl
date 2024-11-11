@@ -1,0 +1,20 @@
+<div class="irmaos-list">
+  <h3>Irmãos Cadastrados</h3>
+  
+  <div>
+      <!--Dropdown-->
+      <label for="selectIrmao">Busca por Irmão:</label>
+      <select id="selectIrmao" (change)="filtrarPorIrmao($event)">
+        <option value="">Selecione um Irmão</option>
+        <option *ngFor="let irmao of irmaos" [value]="irmao.nomeIrmao">{{ irmao.nomeIrmao }}</option>
+      </select>
+    </div>
+  
+  <div *ngFor="let irmao of irmaosFiltrados">
+    <div *ngIf="irmao.nomeIrmao && irmao.whatsapp" class="irmao-item">
+      <strong>Irmão:</strong> {{ irmao.nomeIrmao }} <br>
+      <strong>WhatsApp:</strong> {{ irmao.whatsapp }} <br>
+      <strong>Aparelho:</strong> {{ irmao.idAparelho }} <br>
+    </div>
+  </div>
+</div>  

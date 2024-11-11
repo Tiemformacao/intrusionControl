@@ -1,0 +1,50 @@
+* {
+	background-color: rgb(128, 128, 128);
+}
+
+
+.menu-toggle { 
+  width: 150px;  
+  color: rgb(255, 255, 255);
+  cursor: pointer;
+  text-align: center;
+  padding: 8px;
+  
+}
+
+ul {
+	margin-top: 8px;
+	display: flex;
+	flex-direction: column;
+	text-align: center;
+	gap: 3px;
+	transform: translateX(-15px);
+}
+
+li {
+  padding: 2px;
+  cursor: pointer;
+  text-align: center;
+  color: rgb(0, 0, 0); 
+  background-color: rgb(192, 192, 192);
+  list-style-type: none;
+  border-radius: 4px;
+}
+
+li:hover {
+  background-color: #666;
+  color: aliceblue;
+}
+
+hr {
+	transform: translateY(-10px);
+}
+
+
+.selecionado {
+  background-color: #444; /* Diferente do hover */
+  color: #fff;
+}
+
+
+

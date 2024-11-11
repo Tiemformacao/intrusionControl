@@ -1,0 +1,34 @@
+<div class="sidebar">
+<!--  Os códigos abaixo é para fazer a função de expandir e recolher o menu de Aparelhos;-->
+<!--  <div class="menu-toggle" (click)="toggleMenu()">-->
+<!--    <span *ngIf="isClosed">Aparelhos ►</span>-->
+<!--    <span *ngIf="!isClosed">Aparelhos ▼</span>-->
+<!--  </div>-->
+
+<!--*ngIf="!isClosed" - É o que fica logo após do "ul" (dentro da tag "ul") --> 
+
+  
+<ul>
+    <!-- Listar os aparelhos e destacar o aparelho ativo -->
+    <li *ngFor="let aparelho of aparelhos" 
+        (click)="selecionarAparelho(aparelho)" 
+        [class.selecionado]="aparelho === aparelhoAtivo">
+      Aparelho {{ aparelho.id_aparelho }}
+    </li>
+
+    <p>_________________</p>
+
+    <!-- Itens adicionais no menu -->
+    <li (click)="onItemSelecionado('irmaos')" [class.selecionado]="itemAtivo === 'irmaos'">Irmãos</li>
+    <li (click)="onItemSelecionado('grupos')" [class.selecionado]="itemAtivo === 'grupos'">Grupos</li>
+    <li (click)="onItemSelecionado('faccionados')" [class.selecionado]="itemAtivo === 'faccionados'">Mapa Facções</li>
+  </ul>
+  
+
+</div>
+
+
+
+
+
+

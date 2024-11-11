@@ -1,0 +1,31 @@
+<div class="grupo-cadastro">
+  <h2>Cadastrar Grupo</h2>
+
+  <form (ngSubmit)="salvarGrupo()">
+    <div class="form-group">
+      <label for="nomeGrupo">Nome do Grupo:</label>
+      <input type="text" id="nomeGrupo" [(ngModel)]="grupo.nomeGrupo" name="nomeGrupo" required />
+    </div>
+
+    <div class="form-group">
+      <label for="faccao">Facção:</label>
+      <select id="faccao" [(ngModel)]="grupo.faccao" name="faccao" required>
+        <option *ngFor="let faccao of faccoes" [ngValue]="faccao">{{ faccao.nome }}</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="area">Área:</label>
+      <input type="text" id="area" [(ngModel)]="grupo.area" name="area" required />
+    </div>
+
+    <div class="form-group">
+      <label for="irmao">Irmão:</label>
+      <select id="irmao" [(ngModel)]="grupo.irmao" name="irmao" required>
+        <option *ngFor="let irmao of irmaos" [ngValue]="irmao">{{ irmao.nomeIrmao }}</option>
+      </select>
+    </div>
+
+    <button type="submit">Salvar</button>
+  </form>
+</div>

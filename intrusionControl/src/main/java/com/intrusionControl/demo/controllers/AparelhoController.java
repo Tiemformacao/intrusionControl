@@ -17,11 +17,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.intrusionControl.demo.DTO.AparelhoDTO;
+import com.intrusionControl.demo.DTO.IrmaoDTO;
 import com.intrusionControl.demo.services.AparelhoService;
 
 @RestController
-@RequestMapping(value = "/aparelho")
 @CrossOrigin(origins = "*")
+@RequestMapping(value = "/aparelho")
 public class AparelhoController {
 	
 	@Autowired
@@ -62,4 +63,15 @@ public class AparelhoController {
         aparelhoService.delete(id);
         return ResponseEntity.noContent().build(); // Retorna 204 No Content após deletar
     }
+    
+    //Um endpoint que retorne os dados dos irmãos.
+    //Esse endpoint irá chamar o método findIrmaos() criamos no serviço e retornar a lista de IrmaoDTO.
+    //É PARA A PARTE DE IRMÃOS CADASTRADOS
+    @GetMapping(value = "/irmaos")
+    public List<IrmaoDTO> findIrmaos() {
+        List<IrmaoDTO> result = aparelhoService.findIrmaos();
+        return result;
+    }
+
+
 }

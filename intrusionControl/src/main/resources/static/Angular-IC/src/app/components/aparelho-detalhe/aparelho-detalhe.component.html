@@ -1,0 +1,375 @@
+<div *ngIf="aparelho">
+  <!-- Exibir os detalhes do aparelho selecionado -->
+  <h3>Detalhes do Aparelho {{ aparelho.id_aparelho }}</h3>
+  
+
+  <div>
+      <strong>Marca/Modelo:</strong>
+      <span *ngIf="!aparelho.isEditMode.marcaModelo && aparelho.marcaModelo">
+        {{ aparelho.marcaModelo }}
+        <button (click)="toggleEditMode('marcaModelo')" class="btn btn-link">
+          <i class="bi bi-pencil"></i> <!-- Ícone de edição -->
+        </button>
+      </span>
+      <span *ngIf="!aparelho.isEditMode.marcaModelo && !aparelho.marcaModelo">
+        <button (click)="toggleEditMode('marcaModelo')" class="btn btn-link">
+          <i class="bi bi-plus-square"></i> <!-- Ícone de adicionar -->
+        </button>
+      </span>
+      <span *ngIf="aparelho.isEditMode.marcaModelo">
+        <input type="text" [(ngModel)]="aparelho.marcaModelo" class="form-control d-inline w-auto">
+        <button (click)="saveEdit('marcaModelo')" class="btn btn-link">
+          <i class="bi bi-floppy"></i> <!-- Ícone de salvar -->
+        </button>
+      </span>
+  </div>
+  
+  
+  <div>
+      <strong>Conta Google:</strong>
+      <span *ngIf="!aparelho.isEditMode.contaGoogle && aparelho.contaGoogle">
+        {{ aparelho.contaGoogle }}
+        <button (click)="toggleEditMode('contaGoogle')" class="btn btn-link">
+          <i class="bi bi-pencil"></i> <!-- Ícone de edição -->
+        </button>
+      </span>
+      <span *ngIf="!aparelho.isEditMode.contaGoogle && !aparelho.contaGoogle">
+        <button (click)="toggleEditMode('contaGoogle')" class="btn btn-link">
+          <i class="bi bi-plus-square"></i> <!-- Ícone de adicionar -->
+        </button>
+      </span>
+      <span *ngIf="aparelho.isEditMode.contaGoogle">
+        <input type="text" [(ngModel)]="aparelho.contaGoogle" class="form-control d-inline w-auto">
+        <button (click)="saveEdit('contaGoogle')" class="btn btn-link">
+          <i class="bi bi-floppy"></i> <!-- Ícone de salvar -->
+        </button>
+      </span>
+  </div>
+  
+  
+  <div>
+        <strong>Observação:</strong>
+        <span *ngIf="!aparelho.isEditMode.observacao && aparelho.observacao">
+          {{ aparelho.observacao }}
+          <button (click)="toggleEditMode('observacao')" class="btn btn-link">
+            <i class="bi bi-pencil"></i> <!-- Ícone de edição -->
+          </button>
+        </span>
+        <span *ngIf="!aparelho.isEditMode.observacao && !aparelho.observacao">
+          <button (click)="toggleEditMode('observacao')" class="btn btn-link">
+            <i class="bi bi-plus-square"></i> <!-- Ícone de adicionar -->
+          </button>
+        </span>
+        <span *ngIf="aparelho.isEditMode.observacao">
+          <input type="text" [(ngModel)]="aparelho.observacao" class="form-control d-inline w-auto">
+          <button (click)="saveEdit('observacao')" class="btn btn-link">
+            <i class="bi bi-floppy"></i> <!-- Ícone de salvar -->
+          </button>
+        </span>
+    </div>
+  
+  
+	<div>
+        <strong>Chip 01:</strong>
+        <span *ngIf="!aparelho.isEditMode.chip01 && aparelho.chip01">
+          {{ aparelho.chip01 }}
+          <button (click)="toggleEditMode('chip01')" class="btn btn-link">
+            <i class="bi bi-pencil"></i> <!-- Ícone de edição -->
+          </button>
+        </span>
+        <span *ngIf="!aparelho.isEditMode.chip01 && !aparelho.chip01">
+          <button (click)="toggleEditMode('chip01')" class="btn btn-link">
+            <i class="bi bi-plus-square"></i> <!-- Ícone de adicionar -->
+          </button>
+        </span>
+        <span *ngIf="aparelho.isEditMode.chip01">
+          <input type="text" [(ngModel)]="aparelho.chip01" class="form-control d-inline w-auto">
+          <button (click)="saveEdit('chip01')" class="btn btn-link">
+            <i class="bi bi-floppy"></i> <!-- Ícone de salvar -->
+          </button>
+        </span>
+	</div>
+  
+  
+ 	<div>
+		<strong>Última Recarga Chip 01:</strong>
+		   <span *ngIf="!aparelho.isEditMode.ultRecChip01 && aparelho.ultRecChip01">
+		     {{ formatarData(aparelho.ultRecChip01) }}
+		     <button (click)="toggleEditMode('ultRecChip01')" class="btn btn-link">
+		       <i class="bi bi-pencil"></i> <!-- Ícone de edição -->
+		     </button>
+		   </span>
+		   <span *ngIf="!aparelho.isEditMode.ultRecChip01 && !aparelho.ultRecChip01">
+		     <button (click)="toggleEditMode('ultRecChip01')" class="btn btn-link">
+		       <i class="bi bi-plus-square"></i> <!-- Ícone de adicionar -->
+		     </button>
+		   </span>
+		   <span *ngIf="aparelho.isEditMode.ultRecChip01">
+		     <input type="date" [(ngModel)]="aparelho.ultRecChip01" class="form-control d-inline w-auto">
+		     <button (click)="saveEdit('ultRecChip01')" class="btn btn-link">
+		       <i class="bi bi-floppy"></i> <!-- Ícone de salvar -->
+		     </button>
+		</span>
+	</div>
+	
+	
+	<div>
+        <strong>Cadastro:</strong>
+        <span *ngIf="!aparelho.isEditMode.cadastroChip01 && aparelho.cadastroChip01">
+          {{ aparelho.cadastroChip01 }}
+          <button (click)="toggleEditMode('cadastroChip01')" class="btn btn-link">
+            <i class="bi bi-pencil"></i> <!-- Ícone de edição -->
+          </button>
+        </span>
+        <span *ngIf="!aparelho.isEditMode.cadastroChip01 && !aparelho.cadastroChip01">
+          <button (click)="toggleEditMode('cadastroChip01')" class="btn btn-link">
+            <i class="bi bi-plus-square"></i> <!-- Ícone de adicionar -->
+          </button>
+        </span>
+        <span *ngIf="aparelho.isEditMode.cadastroChip01">
+          <input type="text" [(ngModel)]="aparelho.cadastroChip01" class="form-control d-inline w-auto">
+          <button (click)="saveEdit('cadastroChip01')" class="btn btn-link">
+            <i class="bi bi-floppy"></i> <!-- Ícone de salvar -->
+          </button>
+        </span>
+	</div>
+	
+	
+	<div>
+	    <strong>Chip 02:</strong>
+	    <span *ngIf="!aparelho.isEditMode.chip02 && aparelho.chip02">
+	      {{ aparelho.chip02 }}
+	      <button (click)="toggleEditMode('chip02')" class="btn btn-link">
+	        <i class="bi bi-pencil"></i> <!-- Ícone de edição -->
+	      </button>
+	    </span>
+	    <span *ngIf="!aparelho.isEditMode.chip02 && !aparelho.chip02">
+	      <button (click)="toggleEditMode('chip02')" class="btn btn-link">
+	        <i class="bi bi-plus-square"></i> <!-- Ícone de adicionar -->
+	      </button>
+	    </span>
+	    <span *ngIf="aparelho.isEditMode.chip02">
+	      <input type="text" [(ngModel)]="aparelho.chip02" class="form-control d-inline w-auto">
+	      <button (click)="saveEdit('chip02')" class="btn btn-link">
+	        <i class="bi bi-floppy"></i> <!-- Ícone de salvar -->
+	      </button>
+	    </span>
+	</div>
+	
+	
+	<div>
+			<strong>Última Recarga Chip 02:</strong>
+			   <span *ngIf="!aparelho.isEditMode.ultRecChip02 && aparelho.ultRecChip02">
+			     {{ formatarData(aparelho.ultRecChip02) }}
+			     <button (click)="toggleEditMode('ultRecChip02')" class="btn btn-link">
+			       <i class="bi bi-pencil"></i> <!-- Ícone de edição -->
+			     </button>
+			   </span>
+			   <span *ngIf="!aparelho.isEditMode.ultRecChip02 && !aparelho.ultRecChip02">
+			     <button (click)="toggleEditMode('ultRecChip02')" class="btn btn-link">
+			       <i class="bi bi-plus-square"></i> <!-- Ícone de adicionar -->
+			     </button>
+			   </span>
+			   <span *ngIf="aparelho.isEditMode.ultRecChip02">
+			     <input type="date" [(ngModel)]="aparelho.ultRecChip02" class="form-control d-inline w-auto">
+			     <button (click)="saveEdit('ultRecChip02')" class="btn btn-link">
+			       <i class="bi bi-floppy"></i> <!-- Ícone de salvar -->
+			     </button>
+			</span>
+		</div>
+	
+	<div>
+	    <strong>Cadastro:</strong>
+	    <span *ngIf="!aparelho.isEditMode.cadastroChip02 && aparelho.cadastroChip02">
+	      {{ aparelho.cadastroChip02 }}
+	      <button (click)="toggleEditMode('cadastroChip02')" class="btn btn-link">
+	        <i class="bi bi-pencil"></i> <!-- Ícone de edição -->
+	      </button>
+	    </span>
+	    <span *ngIf="!aparelho.isEditMode.cadastroChip02 && !aparelho.cadastroChip02">
+	      <button (click)="toggleEditMode('cadastroChip02')" class="btn btn-link">
+	        <i class="bi bi-plus-square"></i> <!-- Ícone de adicionar -->
+	      </button>
+	    </span>
+	    <span *ngIf="aparelho.isEditMode.cadastroChip02">
+	      <input type="text" [(ngModel)]="aparelho.cadastroChip02" class="form-control d-inline w-auto">
+	      <button (click)="saveEdit('cadastroChip02')" class="btn btn-link">
+	        <i class="bi bi-floppy"></i> <!-- Ícone de salvar -->
+	      </button>
+	    </span>
+	</div>
+  
+	
+	<div>
+	    <strong>WhatsApp 01:</strong>
+	    <span *ngIf="!aparelho.isEditMode.whatsapp01 && aparelho.whatsapp01">
+	      {{ aparelho.whatsapp01 }}
+	      <button (click)="toggleEditMode('whatsapp01')" class="btn btn-link">
+	        <i class="bi bi-pencil"></i> <!-- Ícone de edição -->
+	      </button>
+	    </span>
+	    <span *ngIf="!aparelho.isEditMode.whatsapp01 && !aparelho.whatsapp01">
+	      <button (click)="toggleEditMode('whatsapp01')" class="btn btn-link">
+	        <i class="bi bi-plus-square"></i> <!-- Ícone de adicionar -->
+	      </button>
+	    </span>
+	    <span *ngIf="aparelho.isEditMode.whatsapp01">
+	      <input type="text" [(ngModel)]="aparelho.whatsapp01" class="form-control d-inline w-auto">
+	      <button (click)="saveEdit('whatsapp01')" class="btn btn-link">
+	        <i class="bi bi-floppy"></i> <!-- Ícone de salvar -->
+	      </button>
+	    </span>
+	</div>
+  
+	
+	<div>
+	    <strong>Irmão:</strong>
+	    <span *ngIf="!aparelho.isEditMode.irmaoWA01 && aparelho.irmaoWA01">
+	      {{ aparelho.irmaoWA01 }}
+	      <button (click)="toggleEditMode('irmaoWA01')" class="btn btn-link">
+	        <i class="bi bi-pencil"></i> <!-- Ícone de edição -->
+	      </button>
+	    </span>
+	    <span *ngIf="!aparelho.isEditMode.irmaoWA01 && !aparelho.irmaoWA01">
+	      <button (click)="toggleEditMode('irmaoWA01')" class="btn btn-link">
+	        <i class="bi bi-plus-square"></i> <!-- Ícone de adicionar -->
+	      </button>
+	    </span>
+	    <span *ngIf="aparelho.isEditMode.irmaoWA01">
+	      <input type="text" [(ngModel)]="aparelho.irmaoWA01" class="form-control d-inline w-auto">
+	      <button (click)="saveEdit('irmaoWA01')" class="btn btn-link">
+	        <i class="bi bi-floppy"></i> <!-- Ícone de salvar -->
+	      </button>
+	    </span>
+	</div>
+	
+	
+	<div>
+	    <strong>WhatsApp 02:</strong>
+	    <span *ngIf="!aparelho.isEditMode.whatsapp02 && aparelho.whatsapp02">
+	      {{ aparelho.whatsapp02 }}
+	      <button (click)="toggleEditMode('whatsapp02')" class="btn btn-link">
+	        <i class="bi bi-pencil"></i> <!-- Ícone de edição -->
+	      </button>
+	    </span>
+	    <span *ngIf="!aparelho.isEditMode.whatsapp02 && !aparelho.whatsapp02">
+	      <button (click)="toggleEditMode('whatsapp02')" class="btn btn-link">
+	        <i class="bi bi-plus-square"></i> <!-- Ícone de adicionar -->
+	      </button>
+	    </span>
+	    <span *ngIf="aparelho.isEditMode.whatsapp02">
+	      <input type="text" [(ngModel)]="aparelho.whatsapp02" class="form-control d-inline w-auto">
+	      <button (click)="saveEdit('whatsapp02')" class="btn btn-link">
+	        <i class="bi bi-floppy"></i> <!-- Ícone de salvar -->
+	      </button>
+	    </span>
+	</div>
+	
+	<div>
+	    <strong>Irmão:</strong>
+	    <span *ngIf="!aparelho.isEditMode.irmaoWA02 && aparelho.irmaoWA02">
+	      {{ aparelho.irmaoWA02 }}
+	      <button (click)="toggleEditMode('irmaoWA02')" class="btn btn-link">
+	        <i class="bi bi-pencil"></i> <!-- Ícone de edição -->
+	      </button>
+	    </span>
+	    <span *ngIf="!aparelho.isEditMode.irmaoWA02 && !aparelho.irmaoWA02">
+	      <button (click)="toggleEditMode('irmaoWA02')" class="btn btn-link">
+	        <i class="bi bi-plus-square"></i> <!-- Ícone de adicionar -->
+	      </button>
+	    </span>
+	    <span *ngIf="aparelho.isEditMode.irmaoWA02">
+	      <input type="text" [(ngModel)]="aparelho.irmaoWA02" class="form-control d-inline w-auto">
+	      <button (click)="saveEdit('irmaoWA02')" class="btn btn-link">
+	        <i class="bi bi-floppy"></i> <!-- Ícone de salvar -->
+	      </button>
+	    </span>
+	</div>
+  
+
+	<div>
+	    <strong>WhatsApp GB 01:</strong>
+	    <span *ngIf="!aparelho.isEditMode.whatsappGb01 && aparelho.whatsappGb01">
+	      {{ aparelho.whatsappGb01 }}
+	      <button (click)="toggleEditMode('whatsappGb01')" class="btn btn-link">
+	        <i class="bi bi-pencil"></i> <!-- Ícone de edição -->
+	      </button>
+	    </span>
+	    <span *ngIf="!aparelho.isEditMode.whatsappGb01 && !aparelho.whatsappGb01">
+	      <button (click)="toggleEditMode('whatsappGb01')" class="btn btn-link">
+	        <i class="bi bi-plus-square"></i> <!-- Ícone de adicionar -->
+	      </button>
+	    </span>
+	    <span *ngIf="aparelho.isEditMode.whatsappGb01">
+	      <input type="text" [(ngModel)]="aparelho.whatsappGb01" class="form-control d-inline w-auto">
+	      <button (click)="saveEdit('whatsappGb01')" class="btn btn-link">
+	        <i class="bi bi-floppy"></i> <!-- Ícone de salvar -->
+	      </button>
+	    </span>
+	</div>
+	
+	
+	<div>
+	    <strong>Irmão:</strong>
+	    <span *ngIf="!aparelho.isEditMode.irmaoGB01 && aparelho.irmaoGB01">
+	      {{ aparelho.irmaoGB01 }}
+	      <button (click)="toggleEditMode('irmaoGB01')" class="btn btn-link">
+	        <i class="bi bi-pencil"></i> <!-- Ícone de edição -->
+	      </button>
+	    </span>
+	    <span *ngIf="!aparelho.isEditMode.irmaoGB01 && !aparelho.irmaoGB01">
+	      <button (click)="toggleEditMode('irmaoGB01')" class="btn btn-link">
+	        <i class="bi bi-plus-square"></i> <!-- Ícone de adicionar -->
+	      </button>
+	    </span>
+	    <span *ngIf="aparelho.isEditMode.irmaoGB01">
+	      <input type="text" [(ngModel)]="aparelho.irmaoGB01" class="form-control d-inline w-auto">
+	      <button (click)="saveEdit('irmaoGB01')" class="btn btn-link">
+	        <i class="bi bi-floppy"></i> <!-- Ícone de salvar -->
+	      </button>
+	    </span>
+	</div>
+	
+	
+	<div>
+	    <strong>WhatsApp GB 02:</strong>
+	    <span *ngIf="!aparelho.isEditMode.whatsappGb02 && aparelho.whatsappGb02">
+	      {{ aparelho.whatsappGb02 }}
+	      <button (click)="toggleEditMode('whatsappGb02')" class="btn btn-link">
+	        <i class="bi bi-pencil"></i> <!-- Ícone de edição -->
+	      </button>
+	    </span>
+	    <span *ngIf="!aparelho.isEditMode.whatsappGb02 && !aparelho.whatsappGb02">
+	      <button (click)="toggleEditMode('whatsappGb02')" class="btn btn-link">
+	        <i class="bi bi-plus-square"></i> <!-- Ícone de adicionar -->
+	      </button>
+	    </span>
+	    <span *ngIf="aparelho.isEditMode.whatsappGb02">
+	      <input type="text" [(ngModel)]="aparelho.whatsappGb02" class="form-control d-inline w-auto">
+	      <button (click)="saveEdit('whatsappGb02')" class="btn btn-link">
+	        <i class="bi bi-floppy"></i> <!-- Ícone de salvar -->
+	      </button>
+	    </span>
+	</div>
+	
+	
+	<div>
+	    <strong>Irmão:</strong>
+	    <span *ngIf="!aparelho.isEditMode.irmaoGB02 && aparelho.irmaoGB02">
+	      {{ aparelho.irmaoGB02 }}
+	      <button (click)="toggleEditMode('irmaoGB02')" class="btn btn-link">
+	        <i class="bi bi-pencil"></i> <!-- Ícone de edição -->
+	      </button>
+	    </span>
+	    <span *ngIf="!aparelho.isEditMode.irmaoGB02 && !aparelho.irmaoGB02">
+	      <button (click)="toggleEditMode('irmaoGB02')" class="btn btn-link">
+	        <i class="bi bi-plus-square"></i> <!-- Ícone de adicionar -->
+	      </button>
+	    </span>
+	    <span *ngIf="aparelho.isEditMode.irmaoGB02">
+	      <input type="text" [(ngModel)]="aparelho.irmaoGB02" class="form-control d-inline w-auto">
+	      <button (click)="saveEdit('irmaoGB02')" class="btn btn-link">
+	        <i class="bi bi-floppy"></i> <!-- Ícone de salvar -->
+	      </button>
+	    </span>
+	</div>

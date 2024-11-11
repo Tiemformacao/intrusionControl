@@ -1,0 +1,20 @@
+* {
+	background-color:#0033FF;
+	padding: 2px;
+}
+
+div {
+	display: flex;
+    align-items: center;
+}
+
+.img_logo{
+	margin-left: 1%;
+}
+
+
+h1{
+	font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+	font-size: 250%;
+	color:rgb(0, 0, 0);
+}
