@@ -73,23 +73,6 @@ export class GrupoCadastroComponent implements OnInit {
     }
   
 
-//  salvarGrupo(): void {
-//    this.grupoService.saveGrupo(this.grupo).subscribe({
-//      next: (response: Grupo) => {
-//        console.log('Grupo salvo com sucesso:', response);
-//        alert('Grupo salvo com sucesso!');
-//        this.grupo = new Grupo(); // Limpar o formulário após o salvamento
-//		this.carregarGrupos(); // Atualizar a lista de grupos
-//      },
-//      error: (err) => {
-//        console.error('Erro ao salvar grupo:', err);
-//        alert('Erro ao salvar o grupo!');
-//      },
-//      complete: () => {
-//        console.log('Operação concluída.');
-//      }
-//    });
-//  }
   
   
 salvarGrupo(): void {
