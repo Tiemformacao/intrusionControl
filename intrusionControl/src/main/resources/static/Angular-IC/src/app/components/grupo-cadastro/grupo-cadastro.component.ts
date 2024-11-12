@@ -76,7 +76,7 @@ export class GrupoCadastroComponent implements OnInit {
 carregarGrupos(): void {
   this.grupoService.getGrupos().subscribe({
     next: (response: Grupo[]) => {
-      // Ordenar para colocar os removidos no final
+      // Garantir que os removidos fiquem no final
       this.grupos = response.sort((a, b) => (a.removido === b.removido) ? 0 : a.removido ? 1 : -1);
       console.log('Grupos carregados:', this.grupos);
     },
@@ -85,6 +85,7 @@ carregarGrupos(): void {
     }
   });
 }
+
 
 
 

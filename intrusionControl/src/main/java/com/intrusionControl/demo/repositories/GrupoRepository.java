@@ -18,6 +18,6 @@ public interface GrupoRepository extends JpaRepository <Grupo, Long> {
     // Exemplo de método personalizado para buscar grupos por irmão
     List<Grupo> findByIrmaoId(Long irmaoId);
 
-    @Query("SELECT g FROM Grupo g ORDER BY g.removido ASC, g.id ASC")
-    List<Grupo> findAllOrdered();
+    @Query("SELECT g FROM Grupo g ORDER BY g.removido ASC, g.dataCriacao DESC")
+    List<Grupo> findAllOrderedByCreationDate();
 }

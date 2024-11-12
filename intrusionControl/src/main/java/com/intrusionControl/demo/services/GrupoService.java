@@ -3,7 +3,6 @@ package com.intrusionControl.demo.services;
 import com.intrusionControl.demo.entities.Grupo;
 import com.intrusionControl.demo.repositories.GrupoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
@@ -22,7 +21,7 @@ public class GrupoService {
 
     // Método para buscar todos os grupos
     public List<Grupo> findAll() {
-        return grupoRepository.findAllOrdered();
+        return grupoRepository.findAllOrderedByCreationDate();
     }
 
     // Método para buscar um grupo por ID
