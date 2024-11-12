@@ -43,13 +43,13 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let grupo of grupos">
+      <tr *ngFor="let grupo of grupos" [ngClass]="{'removido': grupo.removido}">
         <td>{{ grupo.nomeGrupo }}</td>
         <td>{{ grupo.faccao?.nome }}</td>
         <td>{{ grupo.area }}</td>
         <td>{{ grupo.irmao?.nomeIrmao }}</td>
         <td>
-          <button>Remover</button>
+          <button (click)="marcarComoRemovido(grupo)">Remover</button>
         </td>
       </tr>
     </tbody>

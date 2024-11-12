@@ -45,4 +45,11 @@ public class GrupoController {
     public void delete(@PathVariable Long id) {
         grupoService.delete(id);
     }
+    
+    
+    @PutMapping("/{id}/remover")
+    public Grupo marcarComoRemovido(@PathVariable Long id) {
+        return grupoService.marcarComoRemovido(id);
+    }
+
 }

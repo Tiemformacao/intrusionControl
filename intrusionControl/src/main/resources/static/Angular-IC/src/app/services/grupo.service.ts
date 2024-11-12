@@ -35,4 +35,9 @@ export class GrupoService {
   deleteGrupo(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
+  
+  // Método para marcar um grupo como removido
+    marcarComoRemovido(id: number): Observable<Grupo> {
+      return this.http.put<Grupo>(`${this.apiUrl}/${id}/remover`, {});
+    }
 }

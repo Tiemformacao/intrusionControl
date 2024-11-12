@@ -31,6 +31,16 @@ public class Grupo {
     @ManyToOne
     @JoinColumn(name = "irmao_id")
     private Irmao irmao;
+    
+    private boolean removido;
+
+	public boolean isRemovido() {
+		return removido;
+	}
+
+	public void setRemovido(boolean removido) {
+		this.removido = removido;
+	}
 
 	public Long getId() {
 		return id;

@@ -22,7 +22,7 @@ public class GrupoService {
 
     // Método para buscar todos os grupos
     public List<Grupo> findAll() {
-        return grupoRepository.findAll(Sort.by(Sort.Direction.DESC, "id"));
+        return grupoRepository.findAllOrdered();
     }
 
     // Método para buscar um grupo por ID
@@ -49,5 +49,15 @@ public class GrupoService {
         grupoRepository.deleteById(id);
     }
  
+    
+    public Grupo marcarComoRemovido(Long id) {
+        Optional<Grupo> optionalGrupo = grupoRepository.findById(id);
+        if (optionalGrupo.isPresent()) {
+            Grupo grupo = optionalGrupo.get();
+            grupo.setRemovido(true);  // Marcar como removido
+            return grupoRepository.save(grupo);
+        }
+        throw new RuntimeException("Grupo não encontrado com o ID: " + id);
+    }
 
 }
