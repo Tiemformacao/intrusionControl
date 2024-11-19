@@ -1,0 +1,31 @@
+.card {
+  border: none;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card-body {
+  padding: 1.5rem;
+}
+
+.card-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.btn-link {
+  padding: 0;
+  margin-left: 5px;
+  color: #007bff;
+}
+
+.btn-link:hover {
+  color: #0056b3;
+}
+
+h3.text-primary {
+  font-weight: 700;
+}
+
+.mb-4 {
+  margin-bottom: 1.5rem !important;
+}
