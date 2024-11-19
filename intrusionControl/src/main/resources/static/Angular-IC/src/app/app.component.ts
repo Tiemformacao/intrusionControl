@@ -7,15 +7,9 @@ import { NgIf } from '@angular/common';
 import { AparelhoDetalheComponent } from './components/aparelho-detalhe/aparelho-detalhe.component';
 import { IrmaosComponent } from './components/irmaos/irmaos.component';
 import { GrupoCadastroComponent } from './components/grupo-cadastro/grupo-cadastro.component';
-//import {GrupoListaComponent} from './components/grupo-lista/grupo-lista.component';
+import { MapaFaccoesComponent } from './components/mapa-faccoes/mapa-faccoes.component';
+import { ChangeDetectorRef } from '@angular/core';
 
-//import { MatSelectModule } from '@angular/material/select';
-//import { MatCheckboxModule } from '@angular/material/checkbox';
-//import { MatFormFieldModule } from '@angular/material/form-field';
-//
-//import { MatInputModule } from '@angular/material/input';
-//import { MatButtonModule } from '@angular/material/button';
-//import { MatOptionModule } from '@angular/material/core';
 
 
 
@@ -31,60 +25,62 @@ import { GrupoCadastroComponent } from './components/grupo-cadastro/grupo-cadast
 		AparelhoDetalheComponent,
 		IrmaosComponent,
 		GrupoCadastroComponent,
-		//	GrupoListaComponent, 
-		//	MatSelectModule,
-		//	MatCheckboxModule,
-		//	MatFormFieldModule,
-		//	MatInputModule,
-		//	MatButtonModule,
-		//	MatOptionModule
+		MapaFaccoesComponent
 	],
 	templateUrl: './app.component.html',
 	styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+	
+	
+	
 
 	aparelhoSelecionado: any;
 	irmaosVisivel: boolean = false;
 	grupoCadastroVisivel: boolean = false;
-
-
-	onAparelhoSelecionado(aparelho: any) {
-		this.aparelhoSelecionado = aparelho;
-		this.irmaosVisivel = false; // Oculta os "Irmãos" ao selecionar um aparelho
-		this.grupoCadastroVisivel = false;
-	}
-
-	//    onItemSelecionado(item: string) {
-	//      if (item === 'irmaos') {
-	//        this.irmaosVisivel = true;
-	//        this.aparelhoSelecionado = null; // Oculta qualquer aparelho selecionado
-	//      } else {
-	//        this.irmaosVisivel = false; // Oculta os "Irmãos" ao selecionar qualquer outro item do menu
-	//        this.aparelhoSelecionado = null; // Reseta a seleção do aparelho
-	//      }
-	//    }
+	mapaFaccoesVisivel: boolean = false;
+	exibirTelaInicial: boolean = true;
 
 
 
-	// Método chamado quando um item do menu lateral é selecionado
-	onItemSelecionado(item: string) {
-		if (item === 'irmaos') {
-			this.irmaosVisivel = true;
-			this.grupoCadastroVisivel = false;
-			this.aparelhoSelecionado = null;
-		} else if (item === 'grupos') {
-			this.grupoCadastroVisivel = true;
-			this.irmaosVisivel = false;
-			this.aparelhoSelecionado = null;
-		} else {
-			this.irmaosVisivel = false;
-			this.grupoCadastroVisivel = false;
-			this.aparelhoSelecionado = null;
-		}
-	}
+onAparelhoSelecionado(aparelho: any) {
 
+    this.resetVisibilidade(); // Novo: reseta visibilidade dos componentes
+    this.aparelhoSelecionado = aparelho;
+    this.exibirTelaInicial = false; // Oculta a tela inicial ao selecionar um aparelho
 	
+  }
 
+
+
+onItemSelecionado(item: string) {
+
+    this.resetVisibilidade(); // Novo: reseta visibilidade dos componentes
+    this.exibirTelaInicial = false; // Oculta a tela inicial ao selecionar qualquer item do menu
+
+    switch (item) {
+      case 'irmaos':
+        this.irmaosVisivel = true;
+        break;
+      case 'grupos':
+        this.grupoCadastroVisivel = true;
+        break;
+      case 'faccionados':
+        this.mapaFaccoesVisivel = true;
+        break;
+    }
+
+  }
+
+  
+  resetVisibilidade() {
+      // Reseta a visibilidade de todos os componentes
+      this.aparelhoSelecionado = null;
+      this.irmaosVisivel = false;
+      this.grupoCadastroVisivel = false;
+      this.mapaFaccoesVisivel = false;
+    }
+	
+	
 }
 
