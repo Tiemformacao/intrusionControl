@@ -3,10 +3,14 @@ package com.intrusionControl.demo.controllers;
 
 import com.intrusionControl.demo.entities.Grupo;
 import com.intrusionControl.demo.services.GrupoService;
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
+import org.springframework.data.domain.Page;
+
 
 @RestController
 @RequestMapping("/api/grupos")
@@ -50,6 +54,28 @@ public class GrupoController {
     @PutMapping("/{id}/remover")
     public Grupo marcarComoRemovido(@PathVariable Long id) {
         return grupoService.marcarComoRemovido(id);
+    }
+    
+    
+    @GetMapping("/paginado")
+    public Page<Grupo> listarGruposPaginados(@RequestParam(defaultValue = "0") int pagina,
+                                             @RequestParam(defaultValue = "20") int tamanho) {
+        return grupoService.listarGruposPaginados(pagina, tamanho);
+    }
+    
+    
+    @GetMapping("/faccao/{faccaoId}")
+    public Page<Grupo> buscarPorFaccao(@PathVariable Long faccaoId,
+                                       @RequestParam(defaultValue = "0") int pagina,
+                                       @RequestParam(defaultValue = "20") int tamanho) {
+        return grupoService.buscarPorFaccao(faccaoId, pagina, tamanho);
+    }
+
+    @GetMapping("/irmao/{irmaoId}")
+    public Page<Grupo> buscarPorIrmao(@PathVariable Long irmaoId,
+                                      @RequestParam(defaultValue = "0") int pagina,
+                                      @RequestParam(defaultValue = "20") int tamanho) {
+        return grupoService.buscarPorIrmao(irmaoId, pagina, tamanho);
     }
 
 }

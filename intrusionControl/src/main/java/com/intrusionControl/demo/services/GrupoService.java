@@ -2,10 +2,17 @@ package com.intrusionControl.demo.services;
 
 import com.intrusionControl.demo.entities.Grupo;
 import com.intrusionControl.demo.repositories.GrupoRepository;
+
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
+import org.springframework.data.domain.Page;
+
+
+
 
 
 @Service
@@ -57,6 +64,19 @@ public class GrupoService {
             return grupoRepository.save(grupo);
         }
         throw new RuntimeException("Grupo não encontrado com o ID: " + id);
+    }
+    
+    
+    public Page<Grupo> listarGruposPaginados(int pagina, int tamanho) {
+        return grupoRepository.findAll(PageRequest.of(pagina, tamanho));
+    }
+    
+    public Page<Grupo> buscarPorFaccao(Long faccaoId, int pagina, int tamanho) {
+        return grupoRepository.findByFaccaoId(faccaoId, PageRequest.of(pagina, tamanho));
+    }
+
+    public Page<Grupo> buscarPorIrmao(Long irmaoId, int pagina, int tamanho) {
+        return grupoRepository.findByIrmaoId(irmaoId, PageRequest.of(pagina, tamanho));
     }
 
 }

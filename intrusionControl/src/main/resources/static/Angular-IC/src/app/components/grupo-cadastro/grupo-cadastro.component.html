@@ -32,6 +32,31 @@
 
 <div class="grupo-lista">
   <h2>Grupos Cadastrados</h2>
+  
+  <div class="busca-grupos">
+    <h3>Busca por Facção:</h3>
+    <select [(ngModel)]="faccaoSelecionada" name="faccaoBusca" (change)="buscarPorFaccao()">
+      <option value="" disabled selected>Selecione uma facção</option>
+      <option *ngFor="let faccao of faccoes" [value]="faccao.id">{{ faccao.nome }}</option>
+    </select>
+	
+	<!-- Ícone de reset do Bootstrap Icons para listar todos os grupos -->
+	  <i class="bi bi-arrow-clockwise" (click)="listarTodos()" title="Listar todos" style="cursor: pointer; font-size: 24px; margin-left: 10px;"></i>
+
+    <h3>Busca por Irmão:</h3>
+    <select [(ngModel)]="irmaoSelecionado" name="irmaoBusca" (change)="buscarPorIrmao()">
+      <option value="" disabled selected>Selecione um irmão</option>
+      <option *ngFor="let irmao of irmaos" [value]="irmao.id">{{ irmao.nomeIrmao }}</option>
+    </select>
+	
+	<!-- Ícone de reset do Bootstrap Icons para listar todos os grupos -->
+	    <i class="bi bi-arrow-clockwise" (click)="listarTodos()" title="Listar todos" style="cursor: pointer; font-size: 24px; margin-left: 10px;"></i>
+	  
+  </div>
+  
+  
+<!--  <button (click)="listarTodos()">Listar Todos</button>-->
+  
   <table>
     <thead>
       <tr>
@@ -49,10 +74,20 @@
         <td>{{ grupo.area }}</td>
         <td>{{ grupo.irmao?.nomeIrmao }}</td>
         <td>
-          <button (click)="marcarComoRemovido(grupo)">Remover</button>
+          <button 
+		  (click)="marcarComoRemovido(grupo)" 
+		  [ngClass]="{'botao-removido': grupo.removido}"
+		  [disabled]="grupo.removido">Remover</button>
         </td>
       </tr>
     </tbody>
   </table>
+  
+  <div class="paginacao">
+      <button (click)="paginaAnterior()" [disabled]="paginaAtual === 0">Página Anterior</button>
+      <span>Página {{ paginaAtual + 1 }} de {{ totalPaginas }}</span>
+      <button (click)="proximaPagina()" [disabled]="paginaAtual >= totalPaginas - 1">Próxima Página</button>
+    </div>
+  
 </div>
 

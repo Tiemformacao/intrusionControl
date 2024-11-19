@@ -2,3 +2,21 @@
   text-decoration: line-through;
   color: lightgray;
 }
+
+.botao-removido {
+  background-color: lightgray;
+  color: white;
+  cursor: not-allowed;  /* O cursor indica que o botão não é mais clicável */
+  border: 1px solid #ccc;  /* Bordas mais suaves para combinar com o estilo do botão removido */
+}
+
+
+.bi-arrow-clockwise {
+  color: #007bff;  /* Cor azul padrão */
+  transition: transform 0.3s, color 0.3s;
+}
+
+.bi-arrow-clockwise:hover {
+  transform: rotate(360deg);  /* Animação de rotação ao passar o mouse */
+  color: #0056b3;  /* Cor um pouco mais escura ao passar o mouse */
+}

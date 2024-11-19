@@ -40,4 +40,23 @@ export class GrupoService {
     marcarComoRemovido(id: number): Observable<Grupo> {
       return this.http.put<Grupo>(`${this.apiUrl}/${id}/remover`, {});
     }
+	
+	
+	
+	
+	// Método para listar grupos de forma paginada
+	  listarGruposPaginados(pagina: number, tamanho: number): Observable<any> {
+	    return this.http.get<any>(`${this.apiUrl}/paginado?pagina=${pagina}&tamanho=${tamanho}`);
+	  }
+	
+	// Busca grupos por facção com paginação
+	buscarPorFaccao(faccaoId: number, pagina: number, tamanho: number): Observable<any> {
+	  return this.http.get<any>(`${this.apiUrl}/faccao/${faccaoId}?pagina=${pagina}&tamanho=${tamanho}`);
+	}
+
+	// Busca grupos por irmão com paginação
+	buscarPorIrmao(irmaoId: number, pagina: number, tamanho: number): Observable<any> {
+	  return this.http.get<any>(`${this.apiUrl}/irmao/${irmaoId}?pagina=${pagina}&tamanho=${tamanho}`);
+	}
+
 }
