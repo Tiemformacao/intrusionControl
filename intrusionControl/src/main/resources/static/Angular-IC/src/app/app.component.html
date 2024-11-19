@@ -7,7 +7,9 @@
   <div class="menu_lateral_div">
 	    <app-menu-lateral 
 	      (aparelhoSelecionado)="onAparelhoSelecionado($event)" 
-	      (itemSelecionado)="onItemSelecionado($event)">
+	      (itemSelecionado)="onItemSelecionado($event)"
+		 >
+		  
 	    </app-menu-lateral>
   </div>
 
@@ -22,10 +24,9 @@
 	      <app-irmaos></app-irmaos>
 	    </div>
 
-  <div>
-		<app-grupo-cadastro></app-grupo-cadastro>
-<!--		<hr />-->
-<!--		<app-grupo-lista></app-grupo-lista>-->
-   </div> 
+		<!-- Mostrar cadastro de grupos -->
+		    <div *ngIf="grupoCadastroVisivel">
+		      <app-grupo-cadastro></app-grupo-cadastro>
+		    </div>
   
 </div>
