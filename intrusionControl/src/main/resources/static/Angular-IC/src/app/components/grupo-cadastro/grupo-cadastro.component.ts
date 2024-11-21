@@ -29,7 +29,15 @@ export class GrupoCadastroComponent implements OnInit {
 	 faccaoSelecionada: number | null = null;  // Armazena a facção selecionada para busca
 	 irmaoSelecionado: number | null = null;  // Armazena o irmão selecionado para busca
 
-	constructor(
+	
+
+	 
+	 
+	 
+	 
+	 
+	 
+	 constructor(
 		private grupoService: GrupoService,
 		private faccaoService: FaccaoService,
 		private irmaoService: IrmaoService
@@ -270,5 +278,8 @@ buscarPorIrmao(): void {
 	  // Carrega todos os grupos
 	  this.carregarGrupos();
 	}
+	
+	
+
 
 }

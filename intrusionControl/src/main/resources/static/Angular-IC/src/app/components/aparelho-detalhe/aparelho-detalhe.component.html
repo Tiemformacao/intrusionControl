@@ -385,7 +385,12 @@
     <div class="card mb-4">
       <div class="card-body">
         <h5 class="card-title text-secondary">Informações Gerais</h5>
-        <div class="mb-3">
+        
+		
+		
+		
+		
+		<div class="mb-3">
           <strong>Marca/Modelo:</strong>
           <span *ngIf="!aparelho.isEditMode.marcaModelo">
             {{ aparelho.marcaModelo || 'Não definido' }}
@@ -394,12 +399,21 @@
             </button>
           </span>
           <span *ngIf="aparelho.isEditMode.marcaModelo">
-            <input type="text" [(ngModel)]="aparelho.marcaModelo" class="form-control d-inline w-auto">
+            <input type="text" [(ngModel)]="aparelho.marcaModelo" class="form-control d-inline w-auto" (input)="validarMarcaModelo($event)">
             <button (click)="saveEdit('marcaModelo')" class="btn btn-link">
               <i class="bi bi-floppy"></i>
             </button>
           </span>
         </div>
+		<!-- Mensagem de erro para comprimento máximo -->
+		<span *ngIf="erroMarcaModelo" class="text-danger">
+		    {{ erroMarcaModelo }}
+		</span>
+		  
+		  
+		  
+		
+		
         <div class="mb-3">
           <strong>Conta Google:</strong>
           <span *ngIf="!aparelho.isEditMode.contaGoogle">
@@ -409,12 +423,21 @@
             </button>
           </span>
           <span *ngIf="aparelho.isEditMode.contaGoogle">
-            <input type="text" [(ngModel)]="aparelho.contaGoogle" class="form-control d-inline w-auto">
+            <input type="email" [(ngModel)]="aparelho.contaGoogle" class="form-control d-inline w-auto" (input)="validarEmail($event)">
             <button (click)="saveEdit('contaGoogle')" class="btn btn-link">
               <i class="bi bi-floppy"></i>
             </button>
+			<!-- Mensagem de erro caso o e-mail seja inválido -->
+			    <div *ngIf="erroEmail" class="text-danger mt-1">
+			      <small>{{ erroEmail }}</small>
+			    </div>
           </span>
         </div>
+	
+		
+		
+		
+		
         <div class="mb-3">
           <strong>Observação:</strong>
           <span *ngIf="!aparelho.isEditMode.observacao">
@@ -424,14 +447,23 @@
             </button>
           </span>
           <span *ngIf="aparelho.isEditMode.observacao">
-            <input type="text" [(ngModel)]="aparelho.observacao" class="form-control d-inline w-auto">
+            <input type="text" [(ngModel)]="aparelho.observacao" class="form-control d-inline w-auto" (input)="validarObservacao($event)">
             <button (click)="saveEdit('observacao')" class="btn btn-link">
               <i class="bi bi-floppy"></i>
             </button>
+			<!-- Mensagem de erro caso o campo seja inválido -->
+			<div *ngIf="erroObservacao" class="text-danger mt-1">
+			  <small>{{ erroObservacao }}</small>
+			</div>
           </span>
         </div>
       </div>
     </div>
+	
+	
+	
+	
+	
 
     <!-- Cards de Chips e WhatsApp -->
     <div class="row">
@@ -449,10 +481,14 @@
                 </button>
               </span>
               <span *ngIf="aparelho.isEditMode.chip01">
-                <input type="text" [(ngModel)]="aparelho.chip01" class="form-control d-inline w-auto">
+                <input type="text" [(ngModel)]="aparelho.chip01" class="form-control d-inline w-auto" (input)="validarChip01($event)">
                 <button (click)="saveEdit('chip01')" class="btn btn-link">
                   <i class="bi bi-floppy"></i>
                 </button>
+				<!-- Mensagem de erro caso o campo seja inválido -->
+				<div *ngIf="erroChip01" class="text-danger mt-1">
+				  <small>{{ erroChip01 }}</small>
+				</div>
               </span>
             </div>
             <div class="mb-3">
@@ -479,10 +515,15 @@
                 </button>
               </span>
               <span *ngIf="aparelho.isEditMode.cadastroChip01">
-                <input type="text" [(ngModel)]="aparelho.cadastroChip01" class="form-control d-inline w-auto">
+                <input type="text" [(ngModel)]="aparelho.cadastroChip01" class="form-control d-inline w-auto" (input)="validarCadastro($event)">
                 <button (click)="saveEdit('cadastroChip01')" class="btn btn-link">
                   <i class="bi bi-floppy"></i>
                 </button>
+				<!-- Mensagem de erro caso o campo seja inválido -->
+							<div *ngIf="erroCadastro" class="text-danger mt-1">
+							  <small style="color: green;">{{ erroCadastro }}</small>
+							  <small>{{ ' ' + erroCadastro1 }}</small>
+							</div>
               </span>
             </div>
           </div>
@@ -503,10 +544,16 @@
                 </button>
               </span>
               <span *ngIf="aparelho.isEditMode.chip02">
-                <input type="text" [(ngModel)]="aparelho.chip02" class="form-control d-inline w-auto">
+                <input type="text" [(ngModel)]="aparelho.chip02" class="form-control d-inline w-auto" (input)="validarChip02($event)">
                 <button (click)="saveEdit('chip02')" class="btn btn-link">
                   <i class="bi bi-floppy"></i>
                 </button>
+				<!-- Mensagem de erro caso o campo seja inválido -->
+								<div *ngIf="erroChip02" class="text-danger mt-1">
+								  <small>{{ erroChip02 }}</small>
+								</div>
+
+
               </span>
             </div>
             <div class="mb-3">
@@ -533,10 +580,16 @@
                 </button>
               </span>
               <span *ngIf="aparelho.isEditMode.cadastroChip02">
-                <input type="text" [(ngModel)]="aparelho.cadastroChip02" class="form-control d-inline w-auto">
+                <input type="text" [(ngModel)]="aparelho.cadastroChip02" class="form-control d-inline w-auto" (input)="validarCadastroChip02($event)">
                 <button (click)="saveEdit('cadastroChip02')" class="btn btn-link">
                   <i class="bi bi-floppy"></i>
                 </button>
+				<!-- Mensagem de erro caso o campo seja inválido -->
+											<div *ngIf="erroCadastro" class="text-danger mt-1">
+											  <small style="color: green;">{{ erroCadastro3 }}</small>
+											  <small>{{ ' ' + erroCadastro2 }}</small>
+											</div>
+
               </span>
             </div>
           </div>
@@ -557,10 +610,15 @@
                 </button>
               </span>
               <span *ngIf="aparelho.isEditMode.whatsapp01">
-                <input type="text" [(ngModel)]="aparelho.whatsapp01" class="form-control d-inline w-auto">
+                <input type="text" [(ngModel)]="aparelho.whatsapp01" class="form-control d-inline w-auto" (input)="validarwhatsapp01($event)">
                 <button (click)="saveEdit('whatsapp01')" class="btn btn-link">
                   <i class="bi bi-floppy"></i>
                 </button>
+				<!-- Mensagem de erro caso o campo seja inválido -->
+								<div *ngIf="erroWhatsapp01" class="text-danger mt-1">
+								  <small>{{ erroWhatsapp01 }}</small>
+								</div>
+
               </span>
             </div>
             <div class="mb-3">
@@ -572,10 +630,14 @@
                 </button>
               </span>
               <span *ngIf="aparelho.isEditMode.irmaoWA01">
-                <input type="text" [(ngModel)]="aparelho.irmaoWA01" class="form-control d-inline w-auto">
+                <input type="text" [(ngModel)]="aparelho.irmaoWA01" class="form-control d-inline w-auto" (input)="validarirmaoWA01($event)">
                 <button (click)="saveEdit('irmaoWA01')" class="btn btn-link">
                   <i class="bi bi-floppy"></i>
                 </button>
+				<!-- Mensagem de erro caso o campo seja inválido -->
+												<div *ngIf="erroIrmaoWA01" class="text-danger mt-1">
+												  <small>{{ erroIrmaoWA01 }}</small>
+												</div>
               </span>
             </div>
           </div>
@@ -596,10 +658,14 @@
                 </button>
               </span>
               <span *ngIf="aparelho.isEditMode.whatsapp02">
-                <input type="text" [(ngModel)]="aparelho.whatsapp02" class="form-control d-inline w-auto">
+                <input type="text" [(ngModel)]="aparelho.whatsapp02" class="form-control d-inline w-auto" (input)="validarwhatsapp02($event)">
                 <button (click)="saveEdit('whatsapp02')" class="btn btn-link">
                   <i class="bi bi-floppy"></i>
                 </button>
+				<!-- Mensagem de erro caso o campo seja inválido -->
+												<div *ngIf="erroWhatsapp02" class="text-danger mt-1">
+												  <small>{{ erroWhatsapp02 }}</small>
+												</div>
               </span>
             </div>
             <div class="mb-3">
@@ -611,10 +677,14 @@
                 </button>
               </span>
               <span *ngIf="aparelho.isEditMode.irmaoWA02">
-                <input type="text" [(ngModel)]="aparelho.irmaoWA02" class="form-control d-inline w-auto">
+                <input type="text" [(ngModel)]="aparelho.irmaoWA02" class="form-control d-inline w-auto" (input)="validarirmaoWA02($event)">
                 <button (click)="saveEdit('irmaoWA02')" class="btn btn-link">
                   <i class="bi bi-floppy"></i>
                 </button>
+				<!-- Mensagem de erro caso o campo seja inválido -->
+																<div *ngIf="erroIrmaoWA02" class="text-danger mt-1">
+																  <small>{{ erroIrmaoWA02 }}</small>
+																</div>
               </span>
             </div>
           </div>
@@ -635,10 +705,14 @@
                 </button>
               </span>
               <span *ngIf="aparelho.isEditMode.whatsappGb01">
-                <input type="text" [(ngModel)]="aparelho.whatsappGb01" class="form-control d-inline w-auto">
+                <input type="text" [(ngModel)]="aparelho.whatsappGb01" class="form-control d-inline w-auto" (input)="validarWhatsappGb01($event)">
                 <button (click)="saveEdit('whatsappGb01')" class="btn btn-link">
                   <i class="bi bi-floppy"></i>
                 </button>
+				<!-- Mensagem de erro caso o campo seja inválido -->
+																<div *ngIf="erroWhatsappGb01" class="text-danger mt-1">
+																  <small>{{ erroWhatsappGb01 }}</small>
+																</div>
               </span>
             </div>
             <div class="mb-3">
@@ -650,10 +724,14 @@
                 </button>
               </span>
               <span *ngIf="aparelho.isEditMode.irmaoGB01">
-                <input type="text" [(ngModel)]="aparelho.irmaoGB01" class="form-control d-inline w-auto">
+                <input type="text" [(ngModel)]="aparelho.irmaoGB01" class="form-control d-inline w-auto" (input)="validarirmaoGB01($event)">
                 <button (click)="saveEdit('irmaoGB01')" class="btn btn-link">
                   <i class="bi bi-floppy"></i>
                 </button>
+				<!-- Mensagem de erro caso o campo seja inválido -->
+																<div *ngIf="erroIrmaoGB01" class="text-danger mt-1">
+																  <small>{{ erroIrmaoGB01 }}</small>
+																</div>
               </span>
             </div>
           </div>
@@ -674,10 +752,14 @@
                 </button>
               </span>
               <span *ngIf="aparelho.isEditMode.whatsappGb02">
-                <input type="text" [(ngModel)]="aparelho.whatsappGb02" class="form-control d-inline w-auto">
+                <input type="text" [(ngModel)]="aparelho.whatsappGb02" class="form-control d-inline w-auto" (input)="validarWhatsappGb02($event)">
                 <button (click)="saveEdit('whatsappGb02')" class="btn btn-link">
                   <i class="bi bi-floppy"></i>
                 </button>
+					<!-- Mensagem de erro caso o campo seja inválido -->
+					<div *ngIf="erroWhatsappGb02" class="text-danger mt-1">
+					<small>{{ erroWhatsappGb02 }}</small>
+					</div>
               </span>
             </div>
             <div class="mb-3">
@@ -689,10 +771,14 @@
                 </button>
               </span>
               <span *ngIf="aparelho.isEditMode.irmaoGB02">
-                <input type="text" [(ngModel)]="aparelho.irmaoGB02" class="form-control d-inline w-auto">
+                <input type="text" [(ngModel)]="aparelho.irmaoGB02" class="form-control d-inline w-auto" (input)="validarirmaoGB02($event)">
                 <button (click)="saveEdit('irmaoGB02')" class="btn btn-link">
                   <i class="bi bi-floppy"></i>
                 </button>
+				<!-- Mensagem de erro caso o campo seja inválido -->
+					<div *ngIf="erroIrmaoGB02" class="text-danger mt-1">
+					<small>{{ erroIrmaoGB02 }}</small>
+					</div>
               </span>
             </div>
           </div>

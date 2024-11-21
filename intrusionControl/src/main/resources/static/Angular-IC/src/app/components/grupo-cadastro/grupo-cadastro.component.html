@@ -1,93 +1,380 @@
-<div class="grupo-cadastro">
-  <h2>Cadastrar Grupo</h2>
+<!--<div class="grupo-cadastro">-->
+<!--  <h2>Cadastrar Grupo</h2>-->
 
-  <form (ngSubmit)="salvarGrupo()">
-    <div class="form-group">
-      <label for="nomeGrupo">Nome do Grupo:</label>
-      <input type="text" id="nomeGrupo" [(ngModel)]="grupo.nomeGrupo" name="nomeGrupo" required />
+<!--  <form (ngSubmit)="salvarGrupo()">-->
+<!--    <div class="form-group">-->
+<!--      <label for="nomeGrupo">Nome do Grupo:</label>-->
+<!--      <input type="text" id="nomeGrupo" [(ngModel)]="grupo.nomeGrupo" name="nomeGrupo" required />-->
+<!--    </div>-->
+
+<!--    <div class="form-group">-->
+<!--      <label for="faccao">Facção:</label>-->
+<!--      <select id="faccao" [(ngModel)]="grupo.faccao" name="faccao" required>-->
+<!--        <option *ngFor="let faccao of faccoes" [ngValue]="faccao">{{ faccao.nome }}</option>-->
+<!--      </select>-->
+<!--    </div>-->
+
+<!--    <div class="form-group">-->
+<!--      <label for="area">Área:</label>-->
+<!--      <input type="text" id="area" [(ngModel)]="grupo.area" name="area" required />-->
+<!--    </div>-->
+
+<!--    <div class="form-group">-->
+<!--      <label for="irmao">Irmão:</label>-->
+<!--      <select id="irmao" [(ngModel)]="grupo.irmao" name="irmao" required>-->
+<!--        <option *ngFor="let irmao of irmaos" [ngValue]="irmao">{{ irmao.nomeIrmao }}</option>-->
+<!--      </select>-->
+<!--    </div>-->
+
+<!--    <button type="submit">Salvar</button>-->
+<!--  </form>-->
+<!--</div>-->
+
+
+<!--<div class="container mt-5 d-flex justify-content-center">-->
+<!--  <div class="card shadow-lg border-0" style="max-width: 600px; width: 100%;">-->
+<!--    <div class="card-header bg-primary text-white text-center">-->
+<!--      <h3>Cadastrar Grupo</h3>-->
+<!--    </div>-->
+<!--    <div class="card-body p-4">-->
+<!--      <form (ngSubmit)="salvarGrupo()">-->
+        
+<!--        <div class="form-group mb-4">-->
+<!--          <label for="nomeGrupo" class="form-label fw-bold">-->
+<!--            <i class="bi bi-people-fill me-2"></i> Nome do Grupo:-->
+<!--          </label>-->
+<!--          <input type="text" id="nomeGrupo" class="form-control form-control-lg" [(ngModel)]="grupo.nomeGrupo" name="nomeGrupo" placeholder="Digite o nome do grupo" required />-->
+<!--        </div>-->
+
+<!--        <div class="form-group mb-4">-->
+<!--          <label for="faccao" class="form-label fw-bold">-->
+<!--            <i class="bi bi-diagram-3-fill me-2"></i> Facção:-->
+<!--          </label>-->
+<!--          <select id="faccao" class="form-select form-select-lg" [(ngModel)]="grupo.faccao" name="faccao" required>-->
+<!--            <option value="" disabled selected>Selecione uma Facção</option>-->
+<!--            <option *ngFor="let faccao of faccoes" [ngValue]="faccao">{{ faccao.nome }}</option>-->
+<!--          </select>-->
+<!--        </div>-->
+
+<!--        <div class="form-group mb-4">-->
+<!--          <label for="area" class="form-label fw-bold">-->
+<!--            <i class="bi bi-geo-alt-fill me-2"></i> Área:-->
+<!--          </label>-->
+<!--          <input type="text" id="area" class="form-control form-control-lg" [(ngModel)]="grupo.area" name="area" placeholder="Digite a área" required />-->
+<!--        </div>-->
+
+<!--        <div class="form-group mb-4">-->
+<!--          <label for="irmao" class="form-label fw-bold">-->
+<!--            <i class="bi bi-person-fill me-2"></i> Irmão:-->
+<!--          </label>-->
+<!--          <select id="irmao" class="form-select form-select-lg" [(ngModel)]="grupo.irmao" name="irmao" required>-->
+<!--            <option value="" disabled selected>Selecione um Irmão</option>-->
+<!--            <option *ngFor="let irmao of irmaos" [ngValue]="irmao">{{ irmao.nomeIrmao }}</option>-->
+<!--          </select>-->
+<!--        </div>-->
+
+<!--        <div class="text-center">-->
+<!--          <button type="submit" class="btn btn-success btn-lg w-100 mt-4">-->
+<!--            <i class="bi bi-save me-2"></i> Salvar-->
+<!--          </button>-->
+<!--        </div>-->
+
+<!--      </form>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+
+
+
+<div class="container mt-5 d-flex justify-content-center">
+  <div class="card shadow-lg border-0" style="max-width: 600px; width: 100%;">
+    <div class="card-header bg-primary text-white text-center">
+      <h3>Cadastrar Grupo</h3>
     </div>
+    <div class="card-body p-4">
+      <form (ngSubmit)="salvarGrupo()">
+        
+        <div class="form-group mb-4">
+          <label for="nomeGrupo" class="form-label fw-bold">
+            <i class="bi bi-people-fill me-2"></i> Nome do Grupo:
+          </label>
+          <input type="text" id="nomeGrupo" class="form-control" [(ngModel)]="grupo.nomeGrupo" name="nomeGrupo" placeholder="Digite o nome do grupo" required />
+        </div>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 
-    <div class="form-group">
-      <label for="faccao">Facção:</label>
-      <select id="faccao" [(ngModel)]="grupo.faccao" name="faccao" required>
-        <option *ngFor="let faccao of faccoes" [ngValue]="faccao">{{ faccao.nome }}</option>
-      </select>
+        <div class="form-group mb-4">
+          <label for="faccao" class="form-label fw-bold">
+            <i class="bi bi-diagram-3-fill me-2"></i> Facção:
+          </label>
+          <select id="faccao" class="form-control" [(ngModel)]="grupo.faccao" name="faccao" required>
+			<option [ngValue]="null" disabled>Selecione uma Facção</option>
+<!--			<option value="" disabled selected>Selecione uma Facção</option>-->
+            <option *ngFor="let faccao of faccoes" [ngValue]="faccao">{{ faccao.nome }}</option>
+          </select>
+        </div>
+
+
+		
+		
+		
+		
+		
+		
+		
+		
+
+
+        <div class="form-group mb-4">
+          <label for="area" class="form-label fw-bold">
+            <i class="bi bi-geo-alt-fill me-2"></i> Área:
+          </label>
+          <input type="text" id="area" class="form-control" [(ngModel)]="grupo.area" name="area" placeholder="Digite a área" required />
+        </div>
+
+        <div class="form-group mb-4">
+          <label for="irmao" class="form-label fw-bold">
+            <i class="bi bi-person-fill me-2"></i> Irmão:
+          </label>
+          <select id="irmao" class="form-control" [(ngModel)]="grupo.irmao" name="irmao" required>
+<!--            <option value="" disabled selected>Selecione um Irmão</option>-->
+			<option [ngValue]="null" disabled>Selecione um Irmão</option>
+            <option *ngFor="let irmao of irmaos" [ngValue]="irmao">{{ irmao.nomeIrmao }}</option>
+          </select>
+        </div>
+
+        <div class="text-center">
+          <button type="submit" class="btn btn-success w-100 mt-4">
+            <i class="bi bi-save me-2"></i> Salvar
+          </button>
+        </div>
+
+      </form>
     </div>
-
-    <div class="form-group">
-      <label for="area">Área:</label>
-      <input type="text" id="area" [(ngModel)]="grupo.area" name="area" required />
-    </div>
-
-    <div class="form-group">
-      <label for="irmao">Irmão:</label>
-      <select id="irmao" [(ngModel)]="grupo.irmao" name="irmao" required>
-        <option *ngFor="let irmao of irmaos" [ngValue]="irmao">{{ irmao.nomeIrmao }}</option>
-      </select>
-    </div>
-
-    <button type="submit">Salvar</button>
-  </form>
+  </div>
 </div>
 
-<div class="grupo-lista">
-  <h2>Grupos Cadastrados</h2>
-  
-  <div class="busca-grupos">
-    <h3>Busca por Facção:</h3>
-    <select [(ngModel)]="faccaoSelecionada" name="faccaoBusca" (change)="buscarPorFaccao()">
-      <option value="" disabled selected>Selecione uma facção</option>
-      <option *ngFor="let faccao of faccoes" [value]="faccao.id">{{ faccao.nome }}</option>
-    </select>
-	
-	<!-- Ícone de reset do Bootstrap Icons para listar todos os grupos -->
-	  <i class="bi bi-arrow-clockwise" (click)="listarTodos()" title="Listar todos" style="cursor: pointer; font-size: 24px; margin-left: 10px;"></i>
 
-    <h3>Busca por Irmão:</h3>
-    <select [(ngModel)]="irmaoSelecionado" name="irmaoBusca" (change)="buscarPorIrmao()">
-      <option value="" disabled selected>Selecione um irmão</option>
-      <option *ngFor="let irmao of irmaos" [value]="irmao.id">{{ irmao.nomeIrmao }}</option>
-    </select>
+
+
+<!----------------------------------------------------------->
+
+
+
+
+<!--<div class="grupo-lista">-->
+<!--  <h2>Grupos Cadastrados</h2>-->
+  
+<!--  <div class="busca-grupos">-->
+<!--    <h3>Busca por Facção:</h3>-->
+<!--    <select [(ngModel)]="faccaoSelecionada" name="faccaoBusca" (change)="buscarPorFaccao()">-->
+<!--      <option value="" disabled selected>Selecione uma facção</option>-->
+<!--      <option *ngFor="let faccao of faccoes" [value]="faccao.id">{{ faccao.nome }}</option>-->
+<!--    </select>-->
 	
-	<!-- Ícone de reset do Bootstrap Icons para listar todos os grupos -->
-	    <i class="bi bi-arrow-clockwise" (click)="listarTodos()" title="Listar todos" style="cursor: pointer; font-size: 24px; margin-left: 10px;"></i>
+<!--	 Ícone de reset do Bootstrap Icons para listar todos os grupos -->
+<!--	  <i class="bi bi-arrow-clockwise" (click)="listarTodos()" title="Listar todos" style="cursor: pointer; font-size: 24px; margin-left: 10px;"></i>-->
+
+<!--    <h3>Busca por Irmão:</h3>-->
+<!--    <select [(ngModel)]="irmaoSelecionado" name="irmaoBusca" (change)="buscarPorIrmao()">-->
+<!--      <option value="" disabled selected>Selecione um irmão</option>-->
+<!--      <option *ngFor="let irmao of irmaos" [value]="irmao.id">{{ irmao.nomeIrmao }}</option>-->
+<!--    </select>-->
+	
+<!--	 Ícone de reset do Bootstrap Icons para listar todos os grupos -->
+<!--	    <i class="bi bi-arrow-clockwise" (click)="listarTodos()" title="Listar todos" style="cursor: pointer; font-size: 24px; margin-left: 10px;"></i>-->
 	  
+<!--  </div>-->
+  
+
+  
+<!--  <table>-->
+<!--    <thead>-->
+<!--      <tr>-->
+<!--        <th>Nome do Grupo</th>-->
+<!--        <th>Facção</th>-->
+<!--        <th>Área</th>-->
+<!--        <th>Irmão</th>-->
+<!--        <th>Ações</th>-->
+<!--      </tr>-->
+<!--    </thead>-->
+<!--    <tbody>-->
+<!--      <tr *ngFor="let grupo of grupos" [ngClass]="{'removido': grupo.removido}">-->
+<!--        <td>{{ grupo.nomeGrupo }}</td>-->
+<!--        <td>{{ grupo.faccao?.nome }}</td>-->
+<!--        <td>{{ grupo.area }}</td>-->
+<!--        <td>{{ grupo.irmao?.nomeIrmao }}</td>-->
+<!--        <td>-->
+<!--          <button -->
+<!--		  (click)="marcarComoRemovido(grupo)" -->
+<!--		  [ngClass]="{'botao-removido': grupo.removido}"-->
+<!--		  [disabled]="grupo.removido">Remover</button>-->
+<!--        </td>-->
+<!--      </tr>-->
+<!--    </tbody>-->
+<!--  </table>-->
+  
+<!--  <div class="paginacao">-->
+<!--      <button (click)="paginaAnterior()" [disabled]="paginaAtual === 0">Página Anterior</button>-->
+<!--      <span>Página {{ paginaAtual + 1 }} de {{ totalPaginas }}</span>-->
+<!--      <button (click)="proximaPagina()" [disabled]="paginaAtual >= totalPaginas - 1">Próxima Página</button>-->
+<!--    </div>-->
+  
+<!--</div>-->
+
+<!----------------------------------------------------------->
+
+
+
+<div class="grupo-lista card mt-4 p-4">
+  <h2 class="text-center mb-4">Grupos Cadastrados</h2>
+  
+<!--  <div class="busca-grupos mb-4">-->
+<!--    <div class="d-flex align-items-center mb-3">-->
+<!--      <h3 class="mr-3">Busca por Facção:</h3>-->
+<!--      <select class="form-control" [(ngModel)]="faccaoSelecionada" name="faccaoBusca" (change)="buscarPorFaccao()">-->
+<!--        <option value="" disabled selected>Selecione uma facção</option>-->
+<!--        <option *ngFor="let faccao of faccoes" [value]="faccao.id">{{ faccao.nome }}</option>-->
+<!--      </select>-->
+<!--      <i class="bi bi-arrow-clockwise ml-3 reset-icon" (click)="listarTodos()" title="Listar todos"></i>-->
+<!--    </div>-->
+
+<!--    <div class="d-flex align-items-center mb-3">-->
+<!--      <h3 class="mr-3">Busca por Irmão:</h3>-->
+<!--      <select class="form-control" [(ngModel)]="irmaoSelecionado" name="irmaoBusca" (change)="buscarPorIrmao()">-->
+<!--        <option value="" disabled selected>Selecione um irmão</option>-->
+<!--        <option *ngFor="let irmao of irmaos" [value]="irmao.id">{{ irmao.nomeIrmao }}</option>-->
+<!--      </select>-->
+<!--      <i class="bi bi-arrow-clockwise ml-3 reset-icon" (click)="listarTodos()" title="Listar todos"></i>-->
+<!--    </div>-->
+<!--  </div>-->
+
+
+<!--<div class="busca-grupos d-flex">-->
+<!--    <div class="busca-item">-->
+<!--      <h3>Busca por Facção:</h3>-->
+<!--      <select [(ngModel)]="faccaoSelecionada" name="faccaoBusca" (change)="buscarPorFaccao()">-->
+<!--        <option value="" disabled selected>Selecione uma facção</option>-->
+<!--        <option *ngFor="let faccao of faccoes" [value]="faccao.id">{{ faccao.nome }}</option>-->
+<!--      </select>-->
+<!--      <i class="bi bi-arrow-clockwise" (click)="listarTodos()" title="Listar todos" style="cursor: pointer; font-size: 24px; margin-left: 10px;"></i>-->
+<!--    </div>-->
+
+<!--    <div class="busca-item">-->
+<!--      <h3>Busca por Irmão:</h3>-->
+<!--      <select [(ngModel)]="irmaoSelecionado" name="irmaoBusca" (change)="buscarPorIrmao()">-->
+<!--        <option value="" disabled selected>Selecione um irmão</option>-->
+<!--        <option *ngFor="let irmao of irmaos" [value]="irmao.id">{{ irmao.nomeIrmao }}</option>-->
+<!--      </select>-->
+<!--      <i class="bi bi-arrow-clockwise" (click)="listarTodos()" title="Listar todos" style="cursor: pointer; font-size: 24px; margin-left: 10px;"></i>-->
+<!--    </div>-->
+<!--  </div>-->
+
+
+
+
+<div class="busca-grupos">
+    <div class="busca-item">
+      <h3>Busca por Facção:</h3>
+      <div class="busca-select">
+        <select [(ngModel)]="faccaoSelecionada" name="faccaoBusca" (change)="buscarPorFaccao()">
+          <option [ngValue]="null" disabled>Selecione uma facção</option>
+          <option *ngFor="let faccao of faccoes" [value]="faccao.id">{{ faccao.nome }}</option>
+        </select>
+        <i class="bi bi-arrow-clockwise" (click)="listarTodos()" title="Listar todos" style="cursor: pointer; font-size: 24px; margin-left: 10px;"></i>
+      </div>
+    </div>
+
+    <div class="busca-item">
+      <h3>Busca por Irmão:</h3>
+      <div class="busca-select">
+        <select [(ngModel)]="irmaoSelecionado" name="irmaoBusca" (change)="buscarPorIrmao()">
+          <option [ngValue]="null" disabled>Selecione um irmão</option>
+          <option *ngFor="let irmao of irmaos" [value]="irmao.id">{{ irmao.nomeIrmao }}</option>
+        </select>
+        <i class="bi bi-arrow-clockwise" (click)="listarTodos()" title="Listar todos" style="cursor: pointer; font-size: 24px; margin-left: 10px;"></i>
+      </div>
+    </div>
+  </div>
+
+
+  
+  <div class="table-responsive">
+    <table class="table table-hover table-bordered">
+      <thead class="thead-dark">
+        <tr>
+          <th>Nome do Grupo</th>
+          <th>Facção</th>
+          <th>Área</th>
+          <th>Irmão</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let grupo of grupos" [ngClass]="{'removido': grupo.removido}">
+          <td>{{ grupo.nomeGrupo }}</td>
+          <td>{{ grupo.faccao?.nome }}</td>
+          <td>{{ grupo.area }}</td>
+          <td>{{ grupo.irmao?.nomeIrmao }}</td>
+          <td>
+            <button 
+              (click)="marcarComoRemovido(grupo)" 
+              class="btn btn-outline-danger btn-sm"
+              [ngClass]="{'botao-removido': grupo.removido}"
+              [disabled]="grupo.removido">Removido/Desfeito</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
   
-  
-<!--  <button (click)="listarTodos()">Listar Todos</button>-->
-  
-  <table>
-    <thead>
-      <tr>
-        <th>Nome do Grupo</th>
-        <th>Facção</th>
-        <th>Área</th>
-        <th>Irmão</th>
-        <th>Ações</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let grupo of grupos" [ngClass]="{'removido': grupo.removido}">
-        <td>{{ grupo.nomeGrupo }}</td>
-        <td>{{ grupo.faccao?.nome }}</td>
-        <td>{{ grupo.area }}</td>
-        <td>{{ grupo.irmao?.nomeIrmao }}</td>
-        <td>
-          <button 
-		  (click)="marcarComoRemovido(grupo)" 
-		  [ngClass]="{'botao-removido': grupo.removido}"
-		  [disabled]="grupo.removido">Remover</button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-  
-  <div class="paginacao">
-      <button (click)="paginaAnterior()" [disabled]="paginaAtual === 0">Página Anterior</button>
-      <span>Página {{ paginaAtual + 1 }} de {{ totalPaginas }}</span>
-      <button (click)="proximaPagina()" [disabled]="paginaAtual >= totalPaginas - 1">Próxima Página</button>
-    </div>
-  
+  <div class="paginacao mt-4 text-center">
+    <button class="btn btn-outline-primary mr-2" (click)="paginaAnterior()" [disabled]="paginaAtual === 0">Página Anterior</button>
+    <span class="font-weight-bold">Página {{ paginaAtual + 1 }} de {{ totalPaginas }}</span>
+    <button class="btn btn-outline-primary ml-2" (click)="proximaPagina()" [disabled]="paginaAtual >= totalPaginas - 1">Próxima Página</button>
+  </div>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

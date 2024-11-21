@@ -6,9 +6,54 @@
 }
 
 .irmao-item {
-  background: #f9f9f9;
+  background: rgb(238, 238, 238);
   margin: 10px 0;
   padding: 10px;
   border: 1px solid #ddd;
   border-radius: 4px;
 }
+
+
+/* Estilo para a div de busca */
+.search-container {
+  margin: 20px 0; /* Espaçamento vertical para separar do resto dos elementos */
+  text-align: left; /* Deixar o texto alinhado à esquerda */
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+}
+
+/* Label do Select */
+.form-label {
+  font-weight: bold;
+  color: #004aad; /* Um azul que combina com o seu projeto */
+  margin-bottom: 5px;
+}
+
+/* Estilo para o Select */
+.custom-select {
+  width: 100%;
+  max-width: 300px; /* Para limitar o tamanho e não ficar muito largo */
+  padding: 10px;
+  border-radius: 8px; /* Arredondar os cantos */
+  border: 1px solid #ced4da; /* Cor do contorno para harmonizar com o Bootstrap */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s, transform 0.3s; /* Animação suave */
+}
+
+/* Estilo ao interagir com o Select */
+.custom-select:hover,
+.custom-select:focus {
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+}
+
+/* Para dispositivos móveis */
+@media (max-width: 600px) {
+  .custom-select {
+    width: 100%;
+  }
+}
+
+
+
