@@ -7,6 +7,7 @@ import { Faccao } from '../../models/faccao.model';
 import { Irmao } from '../../models/irmao.model';
 import { NgIf, NgFor, CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { NgForm } from '@angular/forms';
 
 @Component({
 	selector: 'app-grupo-cadastro',
@@ -126,12 +127,28 @@ carregarGrupos(): void {
 
 
 
-	salvarGrupo(): void {
+	salvarGrupo(grupoForm: NgForm): void {
+
+		if (grupoForm.invalid) {
+		   return; // Não continua se o formulário for inválido.
+		 }
+		
 		this.grupoService.saveGrupo(this.grupo).subscribe({
 			next: (response: Grupo) => {
 				console.log('Grupo salvo com sucesso:', response);
 				alert('Grupo salvo com sucesso!');
-				this.grupo = new Grupo(); // Limpar o formulário após o salvamento
+				
+				
+				// Aqui redefinimos o formulário após salvar com sucesso
+				      grupoForm.resetForm();
+					  
+					  
+					  // Cria uma nova instância da classe Grupo
+					        this.grupo = new Grupo();
+				
+				
+				
+				
 				this.grupos.unshift(response); // Adiciona o grupo salvo no topo da lista
 			},
 			error: (err) => {
@@ -280,6 +297,46 @@ buscarPorIrmao(): void {
 	}
 	
 	
+	
+//	----------------------VALIDAÇÕES------------------------------
+
+nomeGrupoErro: string | null = null;
+
+  validarNomeGrupo(event: Event): void {
+    const inputElement = event.target as HTMLInputElement;
+
+    // Validação para verificar o limite de caracteres
+    if (inputElement.value.length > 30) {
+      this.nomeGrupoErro = 'O máximo permitido são 30 caracteres.';
+      inputElement.value = inputElement.value.substring(0, 30); // Trunca diretamente no campo
+    } else {
+      this.nomeGrupoErro = null; // Remove a mensagem de erro se estiver dentro do limite
+    }
+
+    // Atualiza o modelo para refletir o valor truncado
+    this.grupo.nomeGrupo = inputElement.value;
+  }
+  
+  
+  
+  areaErro: string | null = null;
+
+    validarArea(event: Event): void {
+      const inputElement = event.target as HTMLInputElement;
+
+      // Validação para verificar o limite de caracteres
+      if (inputElement.value.length > 30) {
+        this.areaErro = 'O máximo permitido são 30 caracteres.';
+        inputElement.value = inputElement.value.substring(0, 30); // Trunca diretamente no campo
+      } else {
+        this.areaErro = null; // Remove a mensagem de erro se estiver dentro do limite
+      }
+
+      // Atualiza o modelo para refletir o valor truncado
+      this.grupo.area = inputElement.value;
+    }
+
+
 
 
 }

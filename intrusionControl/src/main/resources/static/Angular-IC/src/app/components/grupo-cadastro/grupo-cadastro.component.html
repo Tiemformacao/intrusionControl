@@ -92,13 +92,22 @@
       <h3>Cadastrar Grupo</h3>
     </div>
     <div class="card-body p-4">
-      <form (ngSubmit)="salvarGrupo()">
+      <form #grupoForm="ngForm" (ngSubmit)="salvarGrupo(grupoForm)">
         
         <div class="form-group mb-4">
           <label for="nomeGrupo" class="form-label fw-bold">
             <i class="bi bi-people-fill me-2"></i> Nome do Grupo:
           </label>
-          <input type="text" id="nomeGrupo" class="form-control" [(ngModel)]="grupo.nomeGrupo" name="nomeGrupo" placeholder="Digite o nome do grupo" required />
+          <input type="text" id="nomeGrupo" class="form-control" [(ngModel)]="grupo.nomeGrupo" name="nomeGrupo" placeholder="Digite o nome do grupo" required #nomeGrupoInput="ngModel" (input)="validarNomeGrupo($event)"/>
+		  <!-- Mensagem de erro para validação -->
+		      <div *ngIf="nomeGrupoInput?.invalid && nomeGrupoInput?.touched" class="text-danger mt-1">
+		        <small *ngIf="nomeGrupoInput?.errors?.['required']">O campo "Nome do Grupo" é obrigatório.</small>
+		      </div>
+		<!-- Mensagem de erro para validação -->
+			  <div *ngIf="nomeGrupoErro" class="text-danger mt-1">
+				<small>{{ nomeGrupoErro }}</small>
+			  </div>
+		
         </div>
 		
 		
@@ -115,11 +124,15 @@
           <label for="faccao" class="form-label fw-bold">
             <i class="bi bi-diagram-3-fill me-2"></i> Facção:
           </label>
-          <select id="faccao" class="form-control" [(ngModel)]="grupo.faccao" name="faccao" required>
+          <select id="faccao" class="form-control" [(ngModel)]="grupo.faccao" name="faccao" #faccaoInput="ngModel" required>
 			<option [ngValue]="null" disabled>Selecione uma Facção</option>
 <!--			<option value="" disabled selected>Selecione uma Facção</option>-->
             <option *ngFor="let faccao of faccoes" [ngValue]="faccao">{{ faccao.nome }}</option>
           </select>
+		  <!-- Mensagem de erro para validação -->
+		      <div *ngIf="faccaoInput?.invalid && faccaoInput?.touched" class="text-danger mt-1">
+		        <small *ngIf="faccaoInput?.errors?.['required']">O campo de "Facção" é obrigatório.</small>
+		      </div>
         </div>
 
 
@@ -137,22 +150,39 @@
           <label for="area" class="form-label fw-bold">
             <i class="bi bi-geo-alt-fill me-2"></i> Área:
           </label>
-          <input type="text" id="area" class="form-control" [(ngModel)]="grupo.area" name="area" placeholder="Digite a área" required />
+          <input type="text" id="area" class="form-control" [(ngModel)]="grupo.area" name="area" placeholder="Digite a área" #areaInput="ngModel" required  (input)="validarArea($event)"/>
+		  <!-- Mensagem de erro para validação -->
+		  		      <div *ngIf="areaInput?.invalid && areaInput?.touched" class="text-danger mt-1">
+		  		        <small *ngIf="areaInput?.errors?.['required']">O campo de "Área" é obrigatório.</small>
+		  		      </div>
+					  <!-- Mensagem de erro para validação -->
+					  			  <div *ngIf="areaErro" class="text-danger mt-1">
+					  				<small>{{ areaErro }}</small>
+					  			  </div>
         </div>
+		
+		
+		
 
         <div class="form-group mb-4">
           <label for="irmao" class="form-label fw-bold">
             <i class="bi bi-person-fill me-2"></i> Irmão:
           </label>
-          <select id="irmao" class="form-control" [(ngModel)]="grupo.irmao" name="irmao" required>
-<!--            <option value="" disabled selected>Selecione um Irmão</option>-->
+          <select id="irmao" class="form-control" [(ngModel)]="grupo.irmao" name="irmao" #irmaoInput="ngModel" required>
 			<option [ngValue]="null" disabled>Selecione um Irmão</option>
             <option *ngFor="let irmao of irmaos" [ngValue]="irmao">{{ irmao.nomeIrmao }}</option>
           </select>
+		  <!-- Mensagem de erro para validação -->
+		  		      <div *ngIf="irmaoInput?.invalid && irmaoInput?.touched" class="text-danger mt-1">
+		  		        <small *ngIf="irmaoInput?.errors?.['required']">O campo de "Irmão" é obrigatório.</small>
+		  		      </div>
         </div>
+		
+		
+		
 
         <div class="text-center">
-          <button type="submit" class="btn btn-success w-100 mt-4">
+          <button type="submit" class="btn btn-success w-100 mt-4" [disabled]="!grupoForm.valid">
             <i class="bi bi-save me-2"></i> Salvar
           </button>
         </div>
