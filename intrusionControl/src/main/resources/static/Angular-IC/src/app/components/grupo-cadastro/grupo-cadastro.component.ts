@@ -8,6 +8,7 @@ import { Irmao } from '../../models/irmao.model';
 import { NgIf, NgFor, CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { NgForm } from '@angular/forms';
+import { debounceTime, distinctUntilChanged, Subject } from 'rxjs';
 
 @Component({
 	selector: 'app-grupo-cadastro',
@@ -22,23 +23,21 @@ export class GrupoCadastroComponent implements OnInit {
 	irmaos: Irmao[] = [];
 
 	grupos: Grupo[] = []; // Lista para armazenar os grupos
-	
+
 	paginaAtual: number = 0;  // Página atual
-	 tamanhoPagina: number = 100;  // Quantidade de grupos por página
-	 totalPaginas: number = 0;  // Número total de páginas
+	tamanhoPagina: number = 100;  // Quantidade de grupos por página
+	totalPaginas: number = 0;  // Número total de páginas
 
-	 faccaoSelecionada: number | null = null;  // Armazena a facção selecionada para busca
-	 irmaoSelecionado: number | null = null;  // Armazena o irmão selecionado para busca
+	faccaoSelecionada: number | null = null;  // Armazena a facção selecionada para busca
+	irmaoSelecionado: number | null = null;  // Armazena o irmão selecionado para busca
 
-	
 
-	 
-	 
-	 
-	 
-	 
-	 
-	 constructor(
+	areaBusca: string = '';
+	areaBuscaSubject: Subject<string> = new Subject<string>();
+
+
+
+	constructor(
 		private grupoService: GrupoService,
 		private faccaoService: FaccaoService,
 		private irmaoService: IrmaoService
@@ -49,6 +48,18 @@ export class GrupoCadastroComponent implements OnInit {
 		this.carregarFaccoes();
 		this.carregarIrmaos();
 		this.carregarGrupos();
+		
+		// Inscrevendo a busca para ser chamada após o usuário parar de digitar por um tempo
+		    this.areaBuscaSubject.pipe(
+		      debounceTime(300), // Aguarda 300ms após o último evento
+		      distinctUntilChanged() // Apenas valores distintos (não repetidos)
+		    ).subscribe(area => {
+		      if (area) {
+		        this.buscarPorArea(area);
+		      } else {
+		        this.carregarGrupos(); // Se o campo estiver vazio, carrega todos os grupos
+		      }
+		    });
 	}
 
 	carregarFaccoes(): void {
@@ -76,52 +87,27 @@ export class GrupoCadastroComponent implements OnInit {
 	}
 
 
-//	carregarGrupos(): void {
-//		this.grupoService.getGrupos().subscribe({
-//			next: (response: Grupo[]) => {
-//				this.grupos = response;
-//				console.log('Grupos carregados:', this.grupos);
-//			},
-//			error: (err) => {
-//				console.error('Erro ao buscar grupos:', err);
-//			}
-//		});
-//	}
 
 
-//carregarGrupos(): void {
-//  this.grupoService.getGrupos().subscribe({
-//    next: (response: Grupo[]) => {
-//      // Garantir que os removidos fiquem no final
-//      this.grupos = response.sort((a, b) => (a.removido === b.removido) ? 0 : a.removido ? 1 : -1);
-//      console.log('Grupos carregados:', this.grupos);
-//    },
-//    error: (err) => {
-//      console.error('Erro ao buscar grupos:', err);
-//    }
-//  });
-//}
+	carregarGrupos(): void {
+		this.grupoService.listarGruposPaginados(this.paginaAtual, this.tamanhoPagina).subscribe({
+			next: (response) => {
+				// Recebe os grupos da página atual
+				const gruposPaginados = response.content;
 
+				// Ordena os grupos para garantir que os removidos fiquem no final
+				this.grupos = gruposPaginados.sort((a: Grupo, b: Grupo) => (a.removido === b.removido) ? 0 : a.removido ? 1 : -1);
 
-carregarGrupos(): void {
-  this.grupoService.listarGruposPaginados(this.paginaAtual, this.tamanhoPagina).subscribe({
-    next: (response) => {
-      // Recebe os grupos da página atual
-      const gruposPaginados = response.content;
+				// Atualiza o número total de páginas
+				this.totalPaginas = response.totalPages;
 
-      // Ordena os grupos para garantir que os removidos fiquem no final
-      this.grupos = gruposPaginados.sort((a: Grupo, b: Grupo) => (a.removido === b.removido) ? 0 : a.removido ? 1 : -1);
-      
-      // Atualiza o número total de páginas
-      this.totalPaginas = response.totalPages;
-
-      console.log('Grupos carregados (paginados e ordenados):', this.grupos);
-    },
-    error: (err) => {
-      console.error('Erro ao buscar grupos (paginados):', err);
-    }
-  });
-}
+				console.log('Grupos carregados (paginados e ordenados):', this.grupos);
+			},
+			error: (err) => {
+				console.error('Erro ao buscar grupos (paginados):', err);
+			}
+		});
+	}
 
 
 
@@ -130,25 +116,25 @@ carregarGrupos(): void {
 	salvarGrupo(grupoForm: NgForm): void {
 
 		if (grupoForm.invalid) {
-		   return; // Não continua se o formulário for inválido.
-		 }
-		
+			return; // Não continua se o formulário for inválido.
+		}
+
 		this.grupoService.saveGrupo(this.grupo).subscribe({
 			next: (response: Grupo) => {
 				console.log('Grupo salvo com sucesso:', response);
 				alert('Grupo salvo com sucesso!');
-				
-				
+
+
 				// Aqui redefinimos o formulário após salvar com sucesso
-				      grupoForm.resetForm();
-					  
-					  
-					  // Cria uma nova instância da classe Grupo
-					        this.grupo = new Grupo();
-				
-				
-				
-				
+				grupoForm.resetForm();
+
+
+				// Cria uma nova instância da classe Grupo
+				this.grupo = new Grupo();
+
+
+
+
 				this.grupos.unshift(response); // Adiciona o grupo salvo no topo da lista
 			},
 			error: (err) => {
@@ -162,179 +148,172 @@ carregarGrupos(): void {
 
 
 	marcarComoRemovido(grupo: Grupo): void {
-	  this.grupoService.marcarComoRemovido(grupo.id!).subscribe({
-	    next: (grupoAtualizado: Grupo) => {
-	      grupo.removido = grupoAtualizado.removido; // Atualizar o estado local
-	      // Mover o grupo para o final da lista
-	      this.grupos = this.grupos.filter(g => g.id !== grupo.id); // Remover da posição original
-	      this.grupos.push(grupo); // Adicionar ao final
-	    },
-	    error: (err) => {
-	      console.error('Erro ao marcar grupo como removido:', err);
-	    }
-	  });
+		this.grupoService.marcarComoRemovido(grupo.id!).subscribe({
+			next: (grupoAtualizado: Grupo) => {
+				grupo.removido = grupoAtualizado.removido; // Atualizar o estado local
+				// Mover o grupo para o final da lista
+				this.grupos = this.grupos.filter(g => g.id !== grupo.id); // Remover da posição original
+				this.grupos.push(grupo); // Adicionar ao final
+			},
+			error: (err) => {
+				console.error('Erro ao marcar grupo como removido:', err);
+			}
+		});
+	}
+
+
+
+
+	buscarPorFaccao(): void {
+		if (this.faccaoSelecionada !== null) {
+			this.grupoService.buscarPorFaccao(this.faccaoSelecionada, this.paginaAtual, this.tamanhoPagina).subscribe({
+				next: (response) => {
+					// Recebe os grupos filtrados da página atual
+					const gruposFiltrados = response.content;
+
+					// Ordena os grupos para garantir que os removidos fiquem no final
+					this.grupos = gruposFiltrados.sort((a: Grupo, b: Grupo) => (a.removido === b.removido) ? 0 : a.removido ? 1 : -1);
+
+					// Atualiza o número total de páginas
+					this.totalPaginas = response.totalPages;
+
+					console.log('Grupos encontrados por facção (ordenados):', this.grupos);
+				},
+				error: (err) => {
+					console.error('Erro ao buscar por facção:', err);
+				}
+			});
+		}
+	}
+
+
+
+
+	buscarPorIrmao(): void {
+		if (this.irmaoSelecionado !== null) {
+			this.grupoService.buscarPorIrmao(this.irmaoSelecionado, this.paginaAtual, this.tamanhoPagina).subscribe({
+				next: (response) => {
+					// Recebe os grupos filtrados da página atual
+					const gruposFiltrados = response.content;
+
+					// Ordena os grupos para garantir que os removidos fiquem no final
+					this.grupos = gruposFiltrados.sort((a: Grupo, b: Grupo) => (a.removido === b.removido) ? 0 : a.removido ? 1 : -1);
+
+					// Atualiza o número total de páginas
+					this.totalPaginas = response.totalPages;
+
+					console.log('Grupos encontrados por irmão (ordenados):', this.grupos);
+				},
+				error: (err) => {
+					console.error('Erro ao buscar por irmão:', err);
+				}
+			});
+		}
 	}
 	
 	
-	
-	
-	
-//	buscarPorFaccao(): void {
-//	  if (this.faccaoSelecionada !== null) {
-//	    this.grupoService.buscarPorFaccao(this.faccaoSelecionada, this.paginaAtual, this.tamanhoPagina).subscribe({
-//	      next: (response) => {
-//	        this.grupos = response.content;
-//	        this.totalPaginas = response.totalPages;
-//	        console.log('Grupos encontrados por facção:', this.grupos);
-//	      },
-//	      error: (err) => {
-//	        console.error('Erro ao buscar por facção:', err);
-//	      }
-//	    });
-//	  }
-//	}
 
 
-buscarPorFaccao(): void {
-  if (this.faccaoSelecionada !== null) {
-    this.grupoService.buscarPorFaccao(this.faccaoSelecionada, this.paginaAtual, this.tamanhoPagina).subscribe({
-      next: (response) => {
-        // Recebe os grupos filtrados da página atual
-        const gruposFiltrados = response.content;
-
-        // Ordena os grupos para garantir que os removidos fiquem no final
-        this.grupos = gruposFiltrados.sort((a: Grupo, b: Grupo) => (a.removido === b.removido) ? 0 : a.removido ? 1 : -1);
-
-        // Atualiza o número total de páginas
-        this.totalPaginas = response.totalPages;
-
-        console.log('Grupos encontrados por facção (ordenados):', this.grupos);
-      },
-      error: (err) => {
-        console.error('Erro ao buscar por facção:', err);
-      }
-    });
-  }
-}
-
-
-//	buscarPorIrmao(): void {
-//	  if (this.irmaoSelecionado !== null) {
-//	    this.grupoService.buscarPorIrmao(this.irmaoSelecionado, this.paginaAtual, this.tamanhoPagina).subscribe({
-//	      next: (response) => {
-//	        this.grupos = response.content;
-//	        this.totalPaginas = response.totalPages;
-//	        console.log('Grupos encontrados por irmão:', this.grupos);
-//	      },
-//	      error: (err) => {
-//	        console.error('Erro ao buscar por irmão:', err);
-//	      }
-//	    });
-//	  }
-//	}
-
-
-
-buscarPorIrmao(): void {
-  if (this.irmaoSelecionado !== null) {
-    this.grupoService.buscarPorIrmao(this.irmaoSelecionado, this.paginaAtual, this.tamanhoPagina).subscribe({
-      next: (response) => {
-        // Recebe os grupos filtrados da página atual
-        const gruposFiltrados = response.content;
-
-        // Ordena os grupos para garantir que os removidos fiquem no final
-        this.grupos = gruposFiltrados.sort((a: Grupo, b: Grupo) => (a.removido === b.removido) ? 0 : a.removido ? 1 : -1);
-
-        // Atualiza o número total de páginas
-        this.totalPaginas = response.totalPages;
-
-        console.log('Grupos encontrados por irmão (ordenados):', this.grupos);
-      },
-      error: (err) => {
-        console.error('Erro ao buscar por irmão:', err);
-      }
-    });
-  }
-}
-
-	
-	
-	proximaPagina(): void {
-	  if (this.paginaAtual < this.totalPaginas - 1) {
-	    this.paginaAtual++;
-	    if (this.faccaoSelecionada !== null) {
-	      this.buscarPorFaccao();
-	    } else if (this.irmaoSelecionado !== null) {
-	      this.buscarPorIrmao();
-	    } else {
-	      this.carregarGrupos();
-	    }
+	buscarPorArea(area: string): void {
+	    this.grupoService.buscarPorArea(area).subscribe({
+	      next: (response: Grupo[]) => {
+	        // Ordena os grupos para garantir que os removidos fiquem no final
+	        this.grupos = response.sort((a: Grupo, b: Grupo) => (a.removido === b.removido) ? 0 : a.removido ? 1 : -1);
+	        console.log('Grupos encontrados por área (ordenados):', this.grupos);
+	      },
+	      error: (err) => {
+	        console.error('Erro ao buscar por área:', err);
+	      }
+	    });
 	  }
+
+
+	  onAreaInputChange(value: string): void {
+	    this.areaBuscaSubject.next(value);
+	  }
+	
+	
+	
+	
+
+
+
+	proximaPagina(): void {
+		if (this.paginaAtual < this.totalPaginas - 1) {
+			this.paginaAtual++;
+			if (this.faccaoSelecionada !== null) {
+				this.buscarPorFaccao();
+			} else if (this.irmaoSelecionado !== null) {
+				this.buscarPorIrmao();
+			} else {
+				this.carregarGrupos();
+			}
+		}
 	}
 
 	paginaAnterior(): void {
-	  if (this.paginaAtual > 0) {
-	    this.paginaAtual--;
-	    if (this.faccaoSelecionada !== null) {
-	      this.buscarPorFaccao();
-	    } else if (this.irmaoSelecionado !== null) {
-	      this.buscarPorIrmao();
-	    } else {
-	      this.carregarGrupos();
-	    }
-	  }
+		if (this.paginaAtual > 0) {
+			this.paginaAtual--;
+			if (this.faccaoSelecionada !== null) {
+				this.buscarPorFaccao();
+			} else if (this.irmaoSelecionado !== null) {
+				this.buscarPorIrmao();
+			} else {
+				this.carregarGrupos();
+			}
+		}
 	}
 
 
 	listarTodos(): void {
-	  // Reseta os filtros
-	  this.faccaoSelecionada = null;
-	  this.irmaoSelecionado = null;
-	  this.paginaAtual = 0; // Começa da primeira página
+		// Reseta os filtros
+		this.faccaoSelecionada = null;
+		this.irmaoSelecionado = null;
+		this.paginaAtual = 0; // Começa da primeira página
 
-	  // Carrega todos os grupos
-	  this.carregarGrupos();
+		// Carrega todos os grupos
+		this.carregarGrupos();
 	}
-	
-	
-	
-//	----------------------VALIDAÇÕES------------------------------
 
-nomeGrupoErro: string | null = null;
 
-  validarNomeGrupo(event: Event): void {
-    const inputElement = event.target as HTMLInputElement;
 
-    // Validação para verificar o limite de caracteres
-    if (inputElement.value.length > 30) {
-      this.nomeGrupoErro = 'O máximo permitido são 30 caracteres.';
-      inputElement.value = inputElement.value.substring(0, 30); // Trunca diretamente no campo
-    } else {
-      this.nomeGrupoErro = null; // Remove a mensagem de erro se estiver dentro do limite
-    }
+	//	----------------------VALIDAÇÕES------------------------------
 
-    // Atualiza o modelo para refletir o valor truncado
-    this.grupo.nomeGrupo = inputElement.value;
-  }
-  
-  
-  
-  areaErro: string | null = null;
+	nomeGrupoErro: string | null = null;
 
-    validarArea(event: Event): void {
-      const inputElement = event.target as HTMLInputElement;
+	validarNomeGrupo(event: Event): void {
+		const inputElement = event.target as HTMLInputElement;
 
-      // Validação para verificar o limite de caracteres
-      if (inputElement.value.length > 30) {
-        this.areaErro = 'O máximo permitido são 30 caracteres.';
-        inputElement.value = inputElement.value.substring(0, 30); // Trunca diretamente no campo
-      } else {
-        this.areaErro = null; // Remove a mensagem de erro se estiver dentro do limite
-      }
+		// Validação para verificar o limite de caracteres
+		if (inputElement.value.length > 30) {
+			this.nomeGrupoErro = 'O máximo permitido são 30 caracteres.';
+			inputElement.value = inputElement.value.substring(0, 30); // Trunca diretamente no campo
+		} else {
+			this.nomeGrupoErro = null; // Remove a mensagem de erro se estiver dentro do limite
+		}
 
-      // Atualiza o modelo para refletir o valor truncado
-      this.grupo.area = inputElement.value;
-    }
+		// Atualiza o modelo para refletir o valor truncado
+		this.grupo.nomeGrupo = inputElement.value;
+	}
+
+
+
+	areaErro: string | null = null;
+
+	validarArea(event: Event): void {
+		const inputElement = event.target as HTMLInputElement;
+
+		// Validação para verificar o limite de caracteres
+		if (inputElement.value.length > 30) {
+			this.areaErro = 'O máximo permitido são 30 caracteres.';
+			inputElement.value = inputElement.value.substring(0, 30); // Trunca diretamente no campo
+		} else {
+			this.areaErro = null; // Remove a mensagem de erro se estiver dentro do limite
+		}
+
+		// Atualiza o modelo para refletir o valor truncado
+		this.grupo.area = inputElement.value;
+	}
 
 
 

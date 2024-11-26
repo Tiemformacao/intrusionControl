@@ -78,5 +78,12 @@ public class GrupoService {
     public Page<Grupo> buscarPorIrmao(Long irmaoId, int pagina, int tamanho) {
         return grupoRepository.findByIrmaoId(irmaoId, PageRequest.of(pagina, tamanho));
     }
+    
+    
+    //Método para buscar grupo por área
+    public List<Grupo> buscarPorArea(String area) {
+        return grupoRepository.findByAreaContainingIgnoreCase(area);
+    }
+
 
 }

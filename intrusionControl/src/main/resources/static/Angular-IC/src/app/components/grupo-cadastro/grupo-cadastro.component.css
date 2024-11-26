@@ -159,7 +159,7 @@
 
 .grupo-lista .busca-grupos {
   display: flex;
-  gap: 30px;
+  gap: 80px;
   justify-content: center;
   align-items: center;
   margin-bottom: 20px;
@@ -183,6 +183,10 @@
   border-radius: 5px;
   border: 1px solid #ddd;
 }
+
+
+
+
 
 
 /*----------FORMULÁRIO---------------------*/

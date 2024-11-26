@@ -77,5 +77,13 @@ public class GrupoController {
                                       @RequestParam(defaultValue = "20") int tamanho) {
         return grupoService.buscarPorIrmao(irmaoId, pagina, tamanho);
     }
+    
+    
+    //Endpoint para buscar grupo por área
+    @GetMapping("/buscar-por-area")
+    public List<Grupo> buscarPorArea(@RequestParam String area) {
+        return grupoService.buscarPorArea(area);
+    }
+
 
 }

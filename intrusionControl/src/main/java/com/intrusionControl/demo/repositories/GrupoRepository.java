@@ -24,4 +24,7 @@ public interface GrupoRepository extends JpaRepository <Grupo, Long> {
 
     @Query("SELECT g FROM Grupo g ORDER BY g.removido ASC, g.dataCriacao DESC")
     List<Grupo> findAllOrderedByCreationDate();
+    
+    //Buscar grupo por área
+    List<Grupo> findByAreaContainingIgnoreCase(String area);
 }
