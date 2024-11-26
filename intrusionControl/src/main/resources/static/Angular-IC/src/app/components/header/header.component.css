@@ -1,20 +1,94 @@
-* {
-	background-color:#0033FF;
-	padding: 2px;
+/** {*/
+/*	background-color:#0033FF;*/
+/*	padding: 2px;*/
+/*}*/
+
+/*div {*/
+/*	display: flex;*/
+/*    align-items: center;*/
+/*}*/
+
+/*.img_logo{*/
+/*	margin-left: 1%;*/
+/*}*/
+
+
+/*h1{*/
+/*	font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;*/
+/*	font-size: 250%;*/
+/*	color:rgb(0, 0, 0);*/
+/*}*/
+
+
+/*.user-name {*/
+/*  margin-left: auto;  Empurra o texto para o lado direito */
+/*  font-weight: bold;*/
+/*  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);  Adiciona uma leve sombra ao texto */
+/*  font-size: 140%;*/
+  
+/*}*/
+
+
+
+/*------------------------------*/
+
+.header {
+  display: flex;
+  justify-content: space-between; /* Mantém os elementos dos lados opostos */
+  align-items: center;
+  padding: 10px 15px;
+  background-color: #004aad; /* Azul escuro */
+  color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra leve para destacar o cabeçalho */
 }
 
-div {
+
+.img_e_nome {
 	display: flex;
-    align-items: center;
+	flex-direction: row;
+	align-items: center;
 }
 
-.img_logo{
-	margin-left: 1%;
+.img_logo {
+  margin-right: 15px;
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 2rem;
+}
+
+.user-name {
+  font-weight: bold;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Sombra leve para o texto */
+  margin-left: auto; /* Empurra o texto do nome do usuário para a extremidade direita */
 }
 
 
-h1{
-	font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-	font-size: 250%;
-	color:rgb(0, 0, 0);
+
+
+
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.user-name {
+  font-weight: bold;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Sombra leve para o texto */
+  margin-bottom: 5px;
+}
+
+.logout-link {
+  color: #ffdddd; /* Cor diferenciada para destaque */
+  cursor: pointer;
+  text-decoration: underline;
+  font-size: 0.9rem;
+  transition: color 0.3s;
+}
+
+.logout-link:hover {
+  color: #ff5c5c; /* Cor de destaque quando o link estiver sendo "hovered" */
 }

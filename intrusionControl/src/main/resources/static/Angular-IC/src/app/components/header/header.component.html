@@ -1,8 +1,11 @@
-<div>
-  <img class="img_logo" src="logo.png" height="95" />
-  <h1>Intrusion Control</h1>
-</div>
-
+<div class="header">
+	<div class="img_e_nome">
+	  <img class="img_logo" src="logo.png" height="95" />
+	  <h1>Intrusion Control</h1>
+    </div>
 	
-
-
+	<div class="user-info">
+  		<span class="user-name">Olá, {{ nomeUsuario }}</span>
+		<a class="logout-link" (click)="onLogout()">Sair</a>
+	</div>
+</div>

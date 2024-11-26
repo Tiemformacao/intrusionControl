@@ -1,17 +1,17 @@
 
-.main-layout {
-  display: flex;
-  flex-direction: row;
-  flex: 1;
-  height: 100vh;
-}
+/*.main-layout {*/
+/*  display: flex;*/
+/*  flex-direction: row;*/
+/*  flex: 1;*/
+/*  height: 100vh;*/
+/*}*/
 
 
-.content {
-	flex: 1; 
-	background-color: rgb(255, 255, 255);  
+/*.content {*/
+/*	flex: 1; */
+/*	background-color: rgb(255, 255, 255);  */
 	 
-}
+/*}*/
 
 
 
@@ -19,107 +19,107 @@
 /*-----------------------------------------*/
 
 
-body, html {
-  height: 100%;
-  margin: 0;
-}
+/*body, html {*/
+/*  height: 100%;*/
+/*  margin: 0;*/
+/*}*/
 
 /*.main-layout {*/
 /*  display: flex;*/
 /*  height: 100vh;  Altura total da tela */
 /*}*/
 
-.menu_lateral_div {
-  flex: 0 0 8%; /* Controla a largura do menu lateral */
-  background-color: rgb(128, 128, 128);
-}
+/*.menu_lateral_div {*/
+/*  flex: 0 0 8%;  Controla a largura do menu lateral */
+/*  background-color: rgb(128, 128, 128);*/
+/*}*/
 
-.home-container {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start; /* Alinha o conteúdo ao topo */
-  height: 100%;
-  padding: 20px;
-  margin-top: 0; /* Remova ou diminua a margem superior */
-  box-sizing: border-box;
-}
-
-
-.titulo-principal {
-  color: #004aad;
-  font-size: 2.5rem;
-  margin-bottom: 10px;
-}
-
-.subtitulo {
-  color: #333;
-  font-size: 1.2rem;
-  margin-bottom: 20px;
-}
-
-.instrucoes-container {
-  width: 100%;
-  max-width: 1200px;
-  text-align: center;
-  margin-bottom: 20px;
-}
+/*.home-container {*/
+/*  flex: 1;*/
+/*  display: flex;*/
+/*  flex-direction: column;*/
+/*  align-items: center;*/
+/*  justify-content: flex-start;  Alinha o conteúdo ao topo */
+/*  height: 100%;*/
+/*  padding: 20px;*/
+/*  margin-top: 0;  Remova ou diminua a margem superior */
+/*  box-sizing: border-box;*/
+/*}*/
 
 
+/*.titulo-principal {*/
+/*  color: #004aad;*/
+/*  font-size: 2.5rem;*/
+/*  margin-bottom: 10px;*/
+/*}*/
+
+/*.subtitulo {*/
+/*  color: #333;*/
+/*  font-size: 1.2rem;*/
+/*  margin-bottom: 20px;*/
+/*}*/
+
+/*.instrucoes-container {*/
+/*  width: 100%;*/
+/*  max-width: 1200px;*/
+/*  text-align: center;*/
+/*  margin-bottom: 20px;*/
+/*}*/
 
 
 
-.instrucoes-cards {
-  display: flex;
-  justify-content: center; /* Alinha os cards no centro horizontalmente */
-  flex-wrap: wrap;
-  gap: 20px;
-}
 
-.card {
-  background-color: #f0f8ff; /* Azul claro para destacar os cards */
-  border-radius: 12px;
-  padding: 20px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s, box-shadow 0.3s;
-  width: 300px;
-  text-align: left;
-}
 
-.card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-}
+/*.instrucoes-cards {*/
+/*  display: flex;*/
+/*  justify-content: center;  Alinha os cards no centro horizontalmente */
+/*  flex-wrap: wrap;*/
+/*  gap: 20px;*/
+/*}*/
 
-.card h3 {
-  color: #004aad; /* Azul mais escuro para o título */
-  font-weight: bold;
-  margin-bottom: 10px;
-}
+/*.card {*/
+/*  background-color: #f0f8ff;  Azul claro para destacar os cards */
+/*  border-radius: 12px;*/
+/*  padding: 20px;*/
+/*  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);*/
+/*  transition: transform 0.3s, box-shadow 0.3s;*/
+/*  width: 300px;*/
+/*  text-align: left;*/
+/*}*/
 
-.card p {
-  color: #333;
-  font-size: 1rem;
-}
+/*.card:hover {*/
+/*  transform: translateY(-5px);*/
+/*  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);*/
+/*}*/
 
-.coruja-container {
-  margin-top: 20px;
-}
+/*.card h3 {*/
+/*  color: #004aad;  Azul mais escuro para o título */
+/*  font-weight: bold;*/
+/*  margin-bottom: 10px;*/
+/*}*/
 
-.gif-coruja {
-  max-width: 300px;
-  height: auto;
-  animation: soar 3s ease-in-out infinite alternate;
-}
+/*.card p {*/
+/*  color: #333;*/
+/*  font-size: 1rem;*/
+/*}*/
 
-@keyframes soar {
-  from {
-    transform: translateY(0);
-  }
-  to {
-    transform: translateY(10px);
-  }
-}
+/*.coruja-container {*/
+/*  margin-top: 20px;*/
+/*}*/
+
+/*.gif-coruja {*/
+/*  max-width: 300px;*/
+/*  height: auto;*/
+/*  animation: soar 3s ease-in-out infinite alternate;*/
+/*}*/
+
+/*@keyframes soar {*/
+/*  from {*/
+/*    transform: translateY(0);*/
+/*  }*/
+/*  to {*/
+/*    transform: translateY(10px);*/
+/*  }*/
+/*}*/
 
 

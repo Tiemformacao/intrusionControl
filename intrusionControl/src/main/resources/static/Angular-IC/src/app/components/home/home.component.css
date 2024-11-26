@@ -1,0 +1,84 @@
+/* Estilos ajustados para manter o layout conforme o esperado */
+.main-layout {
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+}
+
+.menu_lateral_div {
+  flex: 0 0 15%;
+  background-color: rgb(128, 128, 128);
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.content {
+  flex: 1;
+  background-color: rgb(255, 255, 255);
+  overflow-y: auto;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.home-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.titulo-principal {
+  color: #004aad;
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+}
+
+.subtitulo {
+  color: #333;
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+}
+
+.instrucoes-container {
+  width: 100%;
+  max-width: 1200px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.instrucoes-cards {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.card {
+  background-color: #f0f8ff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+  width: 300px;
+  text-align: left;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.card h3 {
+  color: #004aad;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.card p {
+  color: #333;
+  font-size: 1rem;
+}

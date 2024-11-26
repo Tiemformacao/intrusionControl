@@ -1,16 +1,8 @@
 * {
 	background-color: rgb(128, 128, 128);
+
 }
 
-
-.menu-toggle { 
-  width: 150px;  
-  color: rgb(255, 255, 255);
-  cursor: pointer;
-  text-align: center;
-  padding: 8px;
-  
-}
 
 ul {
 	margin-top: 8px;
@@ -42,7 +34,7 @@ hr {
 
 
 .selecionado {
-  background-color: #444; /* Diferente do hover */
+  background-color: #444;
   color: #fff;
 }
 
