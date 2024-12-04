@@ -1,0 +1,35 @@
+[33mcommit 8e2405ed5933d39eb0f9f7e8017570220a409b50[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m
+Author: Tiemformacao <tiemformacao@outlook.com>
+Date:   Mon Nov 11 11:48:44 2024 -0300
+
+    Salvando os grupos e listando com os mais recentes no topo
+
+[33mcommit bc3d14503dd24c9aedaf8e072258977bd06569bb[m
+Author: Tiemformacao <tiemformacao@outlook.com>
+Date:   Mon Nov 11 10:48:19 2024 -0300
+
+    Cadastrando perfeitamente os grupos no Banco de Dados
+
+[33mcommit b415746bd86cefa08a986a944924334e33b0641e[m
+Author: Tiemformacao <tiemformacao@outlook.com>
+Date:   Mon Sep 30 11:27:25 2024 -0300
+
+    Concluso os métodos GET, POST, PUT e DELETE da tabela Aparelhos | Inclusão do Frontand Angular
+
+[33mcommit 32535bdb68b662b591025690f258b3c7724cfdb8[m
+Author: Tiemformacao <tiemformacao@outlook.com>
+Date:   Sun Sep 29 16:21:09 2024 -0300
+
+    Entitie, Repository, Service, DTO, Controller -> Aparelho
+
+[33mcommit 9e77346e0f8fd6137fdd6abff404d7bc71754b31[m
+Author: Tiemformacao <tiemformacao@outlook.com>
+Date:   Sat Sep 28 17:51:23 2024 -0300
+
+    Tabela tb_table
+
+[33mcommit 5f09257cd3ea494be4bdea4efe4acfcbac874cb8[m
+Author: Tiemformacao <tiemformacao@outlook.com>
+Date:   Sat Sep 28 12:58:20 2024 -0300
+
+    Project created
