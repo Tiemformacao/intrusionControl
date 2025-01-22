@@ -84,6 +84,11 @@ public class GrupoService {
     public List<Grupo> buscarPorArea(String area) {
         return grupoRepository.findByAreaContainingIgnoreCase(area);
     }
+    
+    //Método para buscar grupo pelo nome do grupo
+    public List<Grupo> buscaPorNomeDoGrupo(String nomeGrupo) {
+    	return grupoRepository.findByNomeGrupoContainingIgnoreCase(nomeGrupo);
+    }
 
 
 }

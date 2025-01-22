@@ -8,7 +8,6 @@ import { AparelhoDetalheComponent } from './components/aparelho-detalhe/aparelho
 import { IrmaosComponent } from './components/irmaos/irmaos.component';
 import { GrupoCadastroComponent } from './components/grupo-cadastro/grupo-cadastro.component';
 import { MapaFaccoesComponent } from './components/mapa-faccoes/mapa-faccoes.component';
-import { ChangeDetectorRef } from '@angular/core';
 import { HomeComponent } from './components/home/home.component';
 
 

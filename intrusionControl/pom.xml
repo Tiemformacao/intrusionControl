@@ -108,15 +108,23 @@
         	</plugin>
         	
         	<plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-compiler-plugin</artifactId>
-            <configuration>
-                <source>21</source> 
-                <target>21</target> 
-            </configuration>
-        </plugin>
-        	
-		</plugins>
+	            <groupId>org.apache.maven.plugins</groupId>
+	            <artifactId>maven-compiler-plugin</artifactId>
+	            <configuration>
+	                <source>21</source> 
+	                <target>21</target> 
+	            </configuration>
+            </plugin>
+        </plugins>
+		
+		<resources>
+	    	<resource>
+		        <directory>src/main/resources</directory>
+		        <excludes>
+		            <exclude>static/angular-ic/**</exclude>
+		        </excludes>
+	   		</resource>
+		</resources>
 		
 	</build>
 

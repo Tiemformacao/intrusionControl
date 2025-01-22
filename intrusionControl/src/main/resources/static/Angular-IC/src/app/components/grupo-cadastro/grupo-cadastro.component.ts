@@ -25,7 +25,7 @@ export class GrupoCadastroComponent implements OnInit {
 	grupos: Grupo[] = []; // Lista para armazenar os grupos
 
 	paginaAtual: number = 0;  // Página atual
-	tamanhoPagina: number = 100;  // Quantidade de grupos por página
+	tamanhoPagina: number = 300;  // Quantidade de grupos por página
 	totalPaginas: number = 0;  // Número total de páginas
 
 	faccaoSelecionada: number | null = null;  // Armazena a facção selecionada para busca
@@ -34,6 +34,9 @@ export class GrupoCadastroComponent implements OnInit {
 
 	areaBusca: string = '';
 	areaBuscaSubject: Subject<string> = new Subject<string>();
+
+	nomeGrupoBusca: string = '';
+	nomeGrupoBuscaSubject: Subject<string> = new Subject<string>();
 
 
 
@@ -48,18 +51,30 @@ export class GrupoCadastroComponent implements OnInit {
 		this.carregarFaccoes();
 		this.carregarIrmaos();
 		this.carregarGrupos();
-		
+
 		// Inscrevendo a busca para ser chamada após o usuário parar de digitar por um tempo
-		    this.areaBuscaSubject.pipe(
-		      debounceTime(300), // Aguarda 300ms após o último evento
-		      distinctUntilChanged() // Apenas valores distintos (não repetidos)
-		    ).subscribe(area => {
-		      if (area) {
-		        this.buscarPorArea(area);
-		      } else {
-		        this.carregarGrupos(); // Se o campo estiver vazio, carrega todos os grupos
-		      }
-		    });
+		this.areaBuscaSubject.pipe(
+			debounceTime(300), // Aguarda 300ms após o último evento
+			distinctUntilChanged() // Apenas valores distintos (não repetidos)
+		).subscribe(area => {
+			if (area) {
+				this.buscarPorArea(area);
+			} else {
+				this.carregarGrupos(); // Se o campo estiver vazio, carrega todos os grupos
+			}
+		});
+
+		// Inscrevendo a busca para ser chamada após o usuário parar de digitar por um tempo
+		this.nomeGrupoBuscaSubject.pipe(
+			debounceTime(300), // Aguarda 300ms após o último evento
+			distinctUntilChanged() // Apenas valores distintos (não repetidos)
+		).subscribe(nomeGrupo => {
+			if (nomeGrupo) {
+				this.buscarPorNomeGrupo(nomeGrupo);
+			} else {
+				this.carregarGrupos(); // Se o campo estiver vazio, carrega todos os grupos
+			}
+		});
 	}
 
 	carregarFaccoes(): void {
@@ -210,32 +225,44 @@ export class GrupoCadastroComponent implements OnInit {
 			});
 		}
 	}
-	
-	
+
+
 
 
 	buscarPorArea(area: string): void {
-	    this.grupoService.buscarPorArea(area).subscribe({
-	      next: (response: Grupo[]) => {
-	        // Ordena os grupos para garantir que os removidos fiquem no final
-	        this.grupos = response.sort((a: Grupo, b: Grupo) => (a.removido === b.removido) ? 0 : a.removido ? 1 : -1);
-	        console.log('Grupos encontrados por área (ordenados):', this.grupos);
-	      },
-	      error: (err) => {
-	        console.error('Erro ao buscar por área:', err);
-	      }
-	    });
-	  }
+		this.grupoService.buscarPorArea(area).subscribe({
+			next: (response: Grupo[]) => {
+				// Ordena os grupos para garantir que os removidos fiquem no final
+				this.grupos = response.sort((a: Grupo, b: Grupo) => (a.removido === b.removido) ? 0 : a.removido ? 1 : -1);
+				console.log('Grupos encontrados por área (ordenados):', this.grupos);
+			},
+			error: (err) => {
+				console.error('Erro ao buscar por área:', err);
+			}
+		});
+	}
+
+	onAreaInputChange(value: string): void {
+		this.areaBuscaSubject.next(value);
+	}
 
 
-	  onAreaInputChange(value: string): void {
-	    this.areaBuscaSubject.next(value);
-	  }
-	
-	
-	
-	
+	buscarPorNomeGrupo(nomeGrupo: string): void {
+		this.grupoService.buscarPorNomeGrupo(nomeGrupo).subscribe({
+			next: (response: Grupo[]) => {
+				// Ordena os grupos para garantir que os removidos fiquem no final
+				this.grupos = response.sort((a: Grupo, b: Grupo) => (a.removido === b.removido) ? 0 : a.removido ? 1 : -1);
+				console.log('Grupos encontrados por área (ordenados):', this.grupos);
+			},
+			error: (err) => {
+				console.error('Erro ao buscar por área:', err);
+			}
+		});
+	}
 
+	onNomeGrupoInputChange(value: string): void {
+		this.nomeGrupoBuscaSubject.next(value);
+	}
 
 
 	proximaPagina(): void {

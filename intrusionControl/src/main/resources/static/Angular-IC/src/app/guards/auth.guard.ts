@@ -14,25 +14,43 @@
 //};
 
 
-import { Injectable } from '@angular/core';
-import { CanActivate, Router } from '@angular/router';
+//import { Injectable } from '@angular/core';
+//import { CanActivate, Router } from '@angular/router';
+//
+//@Injectable({
+//  providedIn: 'root'
+//})
+//export class AuthGuard implements CanActivate {
+//
+//  constructor(private router: Router) {}
+//
+//  canActivate(): boolean {
+//    const token = localStorage.getItem('token');
+//
+//    if (token) {
+//      return true; // Se o token estiver presente, a rota é permitida
+//    } else {
+//      this.router.navigate(['/login']); // Se não estiver, redireciona para a tela de login
+//      return false;
+//    }
+//  }
+//}
 
-@Injectable({
-  providedIn: 'root'
-})
-export class AuthGuard implements CanActivate {
+import { CanActivateFn } from '@angular/router';
+import { inject } from '@angular/core';
+import { Router } from '@angular/router';
 
-  constructor(private router: Router) {}
+export const authGuard: CanActivateFn = (route, state) => {
+  const router = inject(Router);
+  const token = localStorage.getItem('token');
 
-  canActivate(): boolean {
-    const token = localStorage.getItem('token');
-
-    if (token) {
-      return true; // Se o token estiver presente, a rota é permitida
-    } else {
-      this.router.navigate(['/login']); // Se não estiver, redireciona para a tela de login
-      return false;
-    }
+  if (token) {
+    // Token encontrado, o usuário pode acessar a rota
+    return true;
+  } else {
+    // Token não encontrado, redirecionar para login
+    alert('Você precisa estar logado para acessar esta página.');
+    router.navigate(['/login']);
+    return false;
   }
-}
-
+};

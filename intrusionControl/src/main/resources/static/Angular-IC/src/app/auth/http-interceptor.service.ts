@@ -22,13 +22,14 @@ export const meuhttpInterceptor: HttpInterceptorFn = (request, next) => {
 	  
 	  
         if (err.status === 401) {
-          alert('401 - tratar aqui');
+          alert('Sua sessão expirou ou suas credenciais estão incorretas. Por favor, faça login novamente.');
           router.navigate(['/login']);
         } else if (err.status === 403) {
-          alert('403 - tratar aqui');
+          alert('Você não tem permissão para acessar este recurso. Por favor, entre em contato com o administrador.');
 		  router.navigate(['/login']);
         } else {
-          console.error('HTTP error:', err);
+          console.error('Erro de comunicação com o servidor:', err);
+		  alert('Ocorreu um erro inesperado. Por favor, tente novamente mais tarde.');
         }
 		
 		

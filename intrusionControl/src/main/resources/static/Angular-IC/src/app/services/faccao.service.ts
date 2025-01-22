@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Faccao } from '../models/faccao.model';
+import { environment } from '../../environments/environment.development';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FaccaoService {
-  private apiUrl = 'http://localhost:8080/api/faccoes';
+  private apiUrl = environment.SERVIDOR+'/api/faccoes';
 
   constructor(private http: HttpClient) {}
 

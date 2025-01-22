@@ -26,14 +26,14 @@ export class LoginComponent {
 				if(token) {
 					//O usuário e senha digitados estavam corretos
 					this.loginService.addToken(token);
-					this.router.navigate(['/home']);
+					this.router.navigate(['/ic-system']);
 				}else {
 					alert('Usuário ou senha incorretos!');
 				}
 			},
-			error: erro => {
-				alert('Deu erro');
-			}
+//			error: erro => {
+//				alert('Deu erro');
+//			}
 		})
 		
 		

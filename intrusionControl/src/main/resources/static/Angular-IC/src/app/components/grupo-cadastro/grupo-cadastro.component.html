@@ -112,6 +112,15 @@
 
 
 <div class="busca-grupos">
+	<div class="busca-item">
+	  <h3>Busca por Grupo:</h3>
+	  <div class="busca-select">
+		  <input type="text" class="form-control" placeholder="Digite o nome do grupo"
+		         [(ngModel)]="nomeGrupoBusca" (input)="onNomeGrupoInputChange(nomeGrupoBusca)">
+	  </div>
+	</div>
+	
+	
     <div class="busca-item">
       <h3>Busca por Facção:</h3>
       <div class="busca-select">
@@ -177,7 +186,7 @@
   
   <div class="paginacao mt-4 text-center">
     <button class="btn btn-outline-primary mr-2" (click)="paginaAnterior()" [disabled]="paginaAtual === 0">Página Anterior</button>
-    <span class="font-weight-bold">Página {{ paginaAtual + 1 }} de {{ totalPaginas }}</span>
+    <span class="font-weight-bold">Página {{ paginaAtual + 1 }} de {{ totalPaginas > 0 ? totalPaginas : 1 }}</span>
     <button class="btn btn-outline-primary ml-2" (click)="proximaPagina()" [disabled]="paginaAtual >= totalPaginas - 1">Próxima Página</button>
   </div>
 </div>

@@ -27,4 +27,7 @@ public interface GrupoRepository extends JpaRepository <Grupo, Long> {
     
     //Buscar grupo por área
     List<Grupo> findByAreaContainingIgnoreCase(String area);
+    
+    //Buscar grupo por nome do grupo
+    List<Grupo> findByNomeGrupoContainingIgnoreCase(String nomeGrupo);
 }

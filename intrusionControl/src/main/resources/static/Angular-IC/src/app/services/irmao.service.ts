@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Irmao } from '../models/irmao.model';
+import { environment } from '../../environments/environment.development';
 
 @Injectable({
   providedIn: 'root'
 })
 export class IrmaoService {
-  private apiUrl = 'http://localhost:8080/api/irmaos';
+  private apiUrl = environment.SERVIDOR+'/api/irmaos';
 
   constructor(private http: HttpClient) {}
 

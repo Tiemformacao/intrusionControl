@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment.development';
 
 
 export interface IrmaoDTO {
@@ -14,7 +15,7 @@ export interface IrmaoDTO {
 })
 export class IrmaoService {
 
-  private apiUrl = 'http://localhost:8080/aparelho/irmaos';
+  private apiUrl = environment.SERVIDOR+'/aparelho/irmaos';
 
   constructor(private http: HttpClient) {}
 

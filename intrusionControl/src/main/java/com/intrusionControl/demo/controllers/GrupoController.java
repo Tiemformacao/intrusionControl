@@ -84,6 +84,12 @@ public class GrupoController {
     public List<Grupo> buscarPorArea(@RequestParam String area) {
         return grupoService.buscarPorArea(area);
     }
+    
+    //Endpoint para buscar grupo por área
+    @GetMapping("/buscar-por-nomeGrupo")
+    public List<Grupo> buscaPorNomeGrupo(@RequestParam String nomeGrupo) {
+    	return grupoService.buscaPorNomeDoGrupo(nomeGrupo);
+    }
 
 
 }
