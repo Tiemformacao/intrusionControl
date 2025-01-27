@@ -1,10 +1,10 @@
 
-<div class="container mt-5 d-flex justify-content-center">
+<div class="container mt-5 d-flex justify-content-center" id="formulario-edicao">
   <div class="card shadow-lg border-0" style="max-width: 600px; width: 100%;">
     <div class="card-header bg-primary text-white text-center">
-      <h3>Cadastrar Grupo</h3>
+      <h3>{{ modoEdicao ? 'Editar Grupo' : 'Cadastrar Grupo' }}</h3>
     </div>
-    <div class="card-body p-4">
+    <div class="card-body p-4" >
       <form #grupoForm="ngForm" (ngSubmit)="salvarGrupo(grupoForm)">
         
         <div class="form-group mb-4">
@@ -172,13 +172,18 @@
           <td>{{ grupo.faccao?.nome }}</td>
           <td>{{ grupo.area }}</td>
           <td>{{ grupo.irmao?.nomeIrmao }}</td>
-          <td>
-            <button 
-              (click)="marcarComoRemovido(grupo)" 
-              class="btn btn-outline-danger btn-sm"
-              [ngClass]="{'botao-removido': grupo.removido}"
-              [disabled]="grupo.removido">Removido/Desfeito</button>
-          </td>
+<!--          <td>-->
+<!--            <button -->
+<!--              (click)="marcarComoRemovido(grupo)" -->
+<!--              class="btn btn-outline-danger btn-sm"-->
+<!--              [ngClass]="{'botao-removido': grupo.removido}"-->
+<!--              [disabled]="grupo.removido">Removido/Desfeito</button>-->
+<!--          </td>-->
+			<td>
+			  <button class="btn btn-primary btn-sm" (click)="editarGrupo(grupo)">
+			    Editar
+			  </button>
+			</td>
         </tr>
       </tbody>
     </table>

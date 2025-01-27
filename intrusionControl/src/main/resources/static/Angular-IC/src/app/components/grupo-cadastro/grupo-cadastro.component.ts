@@ -38,7 +38,7 @@ export class GrupoCadastroComponent implements OnInit {
 	nomeGrupoBusca: string = '';
 	nomeGrupoBuscaSubject: Subject<string> = new Subject<string>();
 
-
+	modoEdicao: boolean = false; // Por padrão, inicia no modo de cadastro
 
 	constructor(
 		private grupoService: GrupoService,
@@ -128,38 +128,77 @@ export class GrupoCadastroComponent implements OnInit {
 
 
 
-	salvarGrupo(grupoForm: NgForm): void {
+	//	salvarGrupo(grupoForm: NgForm): void {
+	//
+	//		if (grupoForm.invalid) {
+	//			return; // Não continua se o formulário for inválido.
+	//		}
+	//
+	//		this.grupoService.saveGrupo(this.grupo).subscribe({
+	//			next: (response: Grupo) => {
+	//				console.log('Grupo salvo com sucesso:', response);
+	//				alert('Grupo salvo com sucesso!');
+	//
+	//
+	//				// Aqui redefinimos o formulário após salvar com sucesso
+	//				grupoForm.resetForm();
+	//
+	//
+	//				// Cria uma nova instância da classe Grupo
+	//				this.grupo = new Grupo();
+	//
+	//
+	//
+	//
+	//				this.grupos.unshift(response); // Adiciona o grupo salvo no topo da lista
+	//			},
+	//			error: (err) => {
+	//				console.error('Erro ao salvar grupo:', err);
+	//			},
+	//			complete: () => {
+	//				console.log('Operação concluída.');
+	//			}
+	//		});
+	//	}
 
+
+	salvarGrupo(grupoForm: NgForm): void {
 		if (grupoForm.invalid) {
 			return; // Não continua se o formulário for inválido.
 		}
 
-		this.grupoService.saveGrupo(this.grupo).subscribe({
-			next: (response: Grupo) => {
-				console.log('Grupo salvo com sucesso:', response);
-				alert('Grupo salvo com sucesso!');
-
-
-				// Aqui redefinimos o formulário após salvar com sucesso
-				grupoForm.resetForm();
-
-
-				// Cria uma nova instância da classe Grupo
-				this.grupo = new Grupo();
-
-
-
-
-				this.grupos.unshift(response); // Adiciona o grupo salvo no topo da lista
-			},
-			error: (err) => {
-				console.error('Erro ao salvar grupo:', err);
-			},
-			complete: () => {
-				console.log('Operação concluída.');
-			}
-		});
+		if (this.grupo.id) {
+			// Atualiza o grupo existente
+			this.grupoService.updateGrupo(this.grupo.id, this.grupo).subscribe({
+				next: (response: Grupo) => {
+					console.log('Grupo atualizado com sucesso:', response);
+					alert('Grupo atualizado com sucesso!');
+					this.carregarGrupos(); // Atualiza a lista de grupos na tabela
+					grupoForm.resetForm(); // Reseta o formulário
+					this.grupo = new Grupo(); // Limpa o objeto de grupo
+					this.modoEdicao = false; // Volta para modo de cadastro
+				},
+				error: (err) => {
+					console.error('Erro ao atualizar grupo:', err);
+				}
+			});
+		} else {
+			// Cria um novo grupo
+			this.grupoService.saveGrupo(this.grupo).subscribe({
+				next: (response: Grupo) => {
+					console.log('Grupo salvo com sucesso:', response);
+					alert('Grupo salvo com sucesso!');
+					this.carregarGrupos(); // Atualiza a lista de grupos na tabela
+					grupoForm.resetForm(); // Reseta o formulário
+					this.grupo = new Grupo(); // Limpa o objeto de grupo
+				},
+				error: (err) => {
+					console.error('Erro ao salvar grupo:', err);
+				}
+			});
+		}
 	}
+
 
 
 	marcarComoRemovido(grupo: Grupo): void {
@@ -303,8 +342,41 @@ export class GrupoCadastroComponent implements OnInit {
 	}
 
 
+	//	----------------------Esse funciona------------------------------//
+//	editarGrupo(grupo: Grupo): void {
+//		this.grupo = {
+//			...grupo,
+//			faccao: this.faccoes.find(f => f.id === grupo.faccao?.id) || null, // Busca a facção correspondente
+//			irmao: this.irmaos.find(i => i.id === grupo.irmao?.id) || null // Busca o irmão correspondente
+//		};
+//
+//		//window.scrollTo({ top: 0, behavior: 'smooth' }); // Opcional: rola para o topo onde está o formulário
+//		const formulario = document.getElementById('formulario-edicao');
+//		if (formulario) {
+//		  formulario.scrollIntoView({ behavior: 'smooth' });
+//		}
+//	}
 
-	//	----------------------VALIDAÇÕES------------------------------
+editarGrupo(grupo: Grupo): void {
+  this.grupo = {
+    ...grupo,
+    faccao: this.faccoes.find(f => f.id === grupo.faccao?.id) || null,
+    irmao: this.irmaos.find(i => i.id === grupo.irmao?.id) || null,
+  };
+  this.modoEdicao = true; // Define como edição
+  const formulario = document.getElementById('formulario-edicao');
+  if (formulario) {
+    formulario.scrollIntoView({ behavior: 'smooth' });
+  }
+}
+
+
+
+
+
+
+
+	//	----------------------VALIDAÇÕES------------------------------//
 
 	nomeGrupoErro: string | null = null;
 
