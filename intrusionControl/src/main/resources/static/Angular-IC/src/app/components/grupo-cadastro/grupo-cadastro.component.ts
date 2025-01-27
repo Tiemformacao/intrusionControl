@@ -25,7 +25,7 @@ export class GrupoCadastroComponent implements OnInit {
 	grupos: Grupo[] = []; // Lista para armazenar os grupos
 
 	paginaAtual: number = 0;  // Página atual
-	tamanhoPagina: number = 300;  // Quantidade de grupos por página
+	tamanhoPagina: number = 500;  // Quantidade de grupos por página
 	totalPaginas: number = 0;  // Número total de páginas
 
 	faccaoSelecionada: number | null = null;  // Armazena a facção selecionada para busca
@@ -371,6 +371,20 @@ editarGrupo(grupo: Grupo): void {
 }
 
 
+deletarGrupo(id: number): void {
+  if (confirm('Tem certeza de que deseja excluir este grupo?')) {
+    this.grupoService.deleteGrupo(id).subscribe({
+      next: () => {
+        alert('Grupo excluído com sucesso!');
+        this.carregarGrupos(); // Atualiza a lista de grupos na tabela
+      },
+      error: (err) => {
+        console.error('Erro ao excluir grupo:', err);
+        alert('Erro ao excluir o grupo.');
+      }
+    });
+  }
+}
 
 
 
@@ -384,9 +398,9 @@ editarGrupo(grupo: Grupo): void {
 		const inputElement = event.target as HTMLInputElement;
 
 		// Validação para verificar o limite de caracteres
-		if (inputElement.value.length > 30) {
-			this.nomeGrupoErro = 'O máximo permitido são 30 caracteres.';
-			inputElement.value = inputElement.value.substring(0, 30); // Trunca diretamente no campo
+		if (inputElement.value.length > 60) {
+			this.nomeGrupoErro = 'O máximo permitido são 60 caracteres.';
+			inputElement.value = inputElement.value.substring(0, 60); // Trunca diretamente no campo
 		} else {
 			this.nomeGrupoErro = null; // Remove a mensagem de erro se estiver dentro do limite
 		}
@@ -403,9 +417,9 @@ editarGrupo(grupo: Grupo): void {
 		const inputElement = event.target as HTMLInputElement;
 
 		// Validação para verificar o limite de caracteres
-		if (inputElement.value.length > 30) {
-			this.areaErro = 'O máximo permitido são 30 caracteres.';
-			inputElement.value = inputElement.value.substring(0, 30); // Trunca diretamente no campo
+		if (inputElement.value.length > 60) {
+			this.areaErro = 'O máximo permitido são 60 caracteres.';
+			inputElement.value = inputElement.value.substring(0, 60); // Trunca diretamente no campo
 		} else {
 			this.areaErro = null; // Remove a mensagem de erro se estiver dentro do limite
 		}

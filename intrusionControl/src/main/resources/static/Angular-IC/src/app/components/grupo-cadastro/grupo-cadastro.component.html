@@ -163,7 +163,7 @@
           <th>Facção</th>
           <th>Área</th>
           <th>Irmão</th>
-          <th>Ação</th>
+          <th style="width: 150px;">Ação</th>
         </tr>
       </thead>
       <tbody>
@@ -183,7 +183,12 @@
 			  <button class="btn btn-primary btn-sm" (click)="editarGrupo(grupo)">
 			    Editar
 			  </button>
+			  <button class="btn btn-danger btn-sm ms-2" (click)="deletarGrupo(grupo.id!)">
+			    Excluir
+			  </button>
 			</td>
+
+
         </tr>
       </tbody>
     </table>
