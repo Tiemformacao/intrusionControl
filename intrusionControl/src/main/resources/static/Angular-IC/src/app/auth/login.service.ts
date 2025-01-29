@@ -6,7 +6,7 @@ import {jwtDecode} from 'jwt-decode'; // Corrigido para garantir a importação 
 import { Login } from './login';
 import { Usuario } from './usuario';
 import { BehaviorSubject } from 'rxjs';
-import { environment } from '../../environments/environment.development';
+import { environment } from '../../environments/environment';
 
 
 

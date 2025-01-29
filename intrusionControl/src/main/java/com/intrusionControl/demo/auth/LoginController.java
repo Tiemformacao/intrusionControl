@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/login")
-@CrossOrigin(origins = {"http://localhost:4200", "http://3.144.209.126"})
+@CrossOrigin(origins = {"http://localhost:4200", "http://172.17.20.103:8080"})
 public class LoginController {
 
 	@Autowired
